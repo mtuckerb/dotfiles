@@ -1,2 +1,2 @@
 #compdef production
-compdef production=heroku
+compdef production=master
