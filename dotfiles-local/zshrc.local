@@ -1,3 +1,7 @@
+#if we don't have oh-my-zsh, clone it please
+if [[ ! -a ~/.oh-my-zsh ]]; then
+  git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh;
+fi
 export DOTFILES="$HOME/workspace/mtuckerb/dotfiles"
 eval "$(rbenv init -)"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
@@ -13,8 +17,7 @@ alias hosts='grep "Host " ~/.ssh/config'
 export PATH="/usr/local/opt/elasticsearch@5.6/bin:$PATH"
 
 
-
-################
+  ###############
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
