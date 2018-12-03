@@ -8,7 +8,7 @@ export PATH="/usr/local/opt/openssl/bin:$PATH"
 ssh-add -q ~/.ssh/mtuckerb-GitHub 2>/dev/null
 ssh-add -q ~/.ssh/mtuckerb-Bitbucket 2>/dev/null
 ssh-add -q ~/.ssh/id_rsa 2>/dev/null
-alias gd='git diffdir'
+alias gd='git difftool --dir-diff --tool=bcomp --no-prompt'
 alias co="git checkout"
 alias burnpack='bundle install && yarn install && webpack && RAILS_ENV=test bundle exec webpack'
 source /usr/local/bin/git_completion.bash
