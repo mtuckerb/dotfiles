@@ -1,6 +1,7 @@
 " Leader
 let mapleader = " "
-
+execute pathogen#infect()
+set rtp+=~/.fzf
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
 set nowritebackup
@@ -103,7 +104,7 @@ set textwidth=80
 set colorcolumn=+1
 
 " Numbers
-set number
+set relativennumber
 set numberwidth=5
 
 " Tab completion

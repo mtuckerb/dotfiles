@@ -40,3 +40,6 @@
 [difftool "bcomp"]
    cmd = bcomp \"$LOCAL\" \"$REMOTE\"
    trustExitCode = true
+[user]
+	email = tucker@tuckerbradford.com
+	name = Tucker Bradford
