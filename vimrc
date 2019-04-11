@@ -12,7 +12,7 @@ set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
-
+set background=dark
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
@@ -104,7 +104,7 @@ set textwidth=80
 set colorcolumn=+1
 
 " Numbers
-set relativennumber
+set relativenumber
 set numberwidth=5
 
 " Tab completion
@@ -166,3 +166,48 @@ set diffopt+=vertical
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
+
+call plug#begin()
+  Plug 'rakr/vim-one'
+  Plug 'wakatime/vim-wakatime'
+  Plug 'scrooloose/nerdtree'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'bling/vim-airline'
+  Plug 'Yggdroot/indentLine'
+  Plug 'wincent/command-t', {
+      \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
+      \ }
+call plug#end()
+
+colorscheme one
+let g:airline_theme='one'
+
+let g:indentLine_enabled = 1
+let g:indentLine_color_term = 234
+let g:indentLine_color_tty_light = 1
+let g:indentLine_color_gui = '#5f605d'
+let g:indentLine_char = '│'
+let g:indentLine_first_char = '.'
+let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_setColors = 1
+let g:indentLine_concealcursor = 'inc'
+let g:indentLine_conceallevel = 2
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+
+let g:CommandTCursorColor = 81
+let g:CommandTHighlightColor= 81
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+
+set hidden
+nmap <leader>T :enew<cr>
+nmap <leader>l :bnext<CR>
+nmap <leader>h :bprevious<CR>
+nmap <leader>bq :bp <BAR> bd #<CR>
+nmap <leader>bl :ls<CR>
+nmap <leader>t :CommandT<CR>
+
+:au FocusLost * silent! wa
