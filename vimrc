@@ -1,6 +1,7 @@
 " Leader
 let mapleader = " "
 execute pathogen#infect()
+set nocompatible
 set rtp+=~/.fzf
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
@@ -168,11 +169,17 @@ if filereadable($HOME . "/.vimrc.local")
 endif
 
 call plug#begin()
+  Plug 'will133/vim-dirdiff'
+  Plug 'godlygeek/tabular'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'tpope/vim-fugitive'
   Plug 'rakr/vim-one'
   Plug 'wakatime/vim-wakatime'
   Plug 'scrooloose/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'bling/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'powerline/fonts'
   Plug 'Yggdroot/indentLine'
   Plug 'wincent/command-t', {
       \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
@@ -180,8 +187,6 @@ call plug#begin()
 call plug#end()
 
 colorscheme one
-let g:airline_theme='one'
-
 let g:indentLine_enabled = 1
 let g:indentLine_color_term = 234
 let g:indentLine_color_tty_light = 1
@@ -193,14 +198,38 @@ let g:indentLine_setColors = 1
 let g:indentLine_concealcursor = 'inc'
 let g:indentLine_conceallevel = 2
 
+let g:airline_theme='bubblegum'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+"" unicode symbols
+"    let g:airline_left_sep = '»'
+"    let g:airline_left_sep = '▶'
+"    let g:airline_right_sep = '«'
+"    let g:airline_right_sep = '◀'
+"    let g:airline_symbols.crypt = '🔒'
+"    let g:airline_symbols.linenr = '☰'
+"    let g:airline_symbols.linenr = '␊'
+"    let g:airline_symbols.linenr = '␤'
+"    let g:airline_symbols.linenr = '¶'
+"    let g:airline_symbols.maxlinenr = ''
+"    let g:airline_symbols.maxlinenr = '㏑'
+"    let g:airline_symbols.branch = '⎇'
+"    let g:airline_symbols.paste = 'ρ'
+"    let g:airline_symbols.paste = 'Þ'
+"    let g:airline_symbols.paste = '∥'
+"    let g:airline_symbols.spell = 'Ꞩ'
+"    let g:airline_symbols.notexists = 'Ɇ'
+"    let g:airline_symbols.whitespace = 'Ξ'
+"
 
 let g:CommandTCursorColor = 81
 let g:CommandTHighlightColor= 81
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+let g:CommandTMatchWindowAtTop= 1
 
 set hidden
 nmap <leader>T :enew<cr>
@@ -211,3 +240,10 @@ nmap <leader>bl :ls<CR>
 nmap <leader>t :CommandT<CR>
 
 :au FocusLost * silent! wa
+
+set tags=./tags;
+" Bind leader p to ctag search
+nnoremap <leader>. :CtrlPTag<cr>
+if &diff
+   colorscheme github
+endif

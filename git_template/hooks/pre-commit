@@ -6,7 +6,7 @@
 exit 0 if ARGV.include?('--no-verify')
 # Update this list with your own forbidden keywords
 KEYWORDS = %w(byebug binding.pry console.log debugger)
-
+IGNORE_FILES = %w(Gemfile Gemfile.lock .gitignore)
 def red(text)    "\033[31m#{text}\033[0m"; end
 def yellow(text) "\033[33m#{text}\033[0m"; end
 
@@ -14,7 +14,7 @@ def yellow(text) "\033[33m#{text}\033[0m"; end
 files_changed = %x(git diff --cached --name-only --).split
 
 # search files for keywords
-%x(git grep -q -E "#{KEYWORDS.join('|')}" #{files_changed.join(' ')})
+%x(git grep -q -E "#{KEYWORDS.join('|')}" #{files_changed.reject{|f| IGNORE_FILES.include? f}.join(' ')})
 if $?.exitstatus.zero?
   puts "# Check following lines:"
   files_changed.each do |file|
