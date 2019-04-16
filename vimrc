@@ -14,6 +14,9 @@ set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 set background=dark
+let g:DirDiffSimpleMap = 1
+let g:DirDiffTheme="github"
+
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
@@ -167,9 +170,10 @@ set diffopt+=vertical
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
-
+"source /home/rbadmin/vim-dirdiff/plugin/dirdiff.vim
 call plug#begin()
-  Plug 'will133/vim-dirdiff'
+  Plug 'mtuckerb/vim-dirdiff'
+  Plug 'w0rp/ale'
   Plug 'godlygeek/tabular'
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive'
@@ -244,6 +248,10 @@ nmap <leader>t :CommandT<CR>
 set tags=./tags;
 " Bind leader p to ctag search
 nnoremap <leader>. :CtrlPTag<cr>
-if &diff
+
+if (&diff)
    colorscheme github
+   nnoremap [ [m
+   nnoremap ] ]m
 endif
+
