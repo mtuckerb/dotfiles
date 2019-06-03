@@ -41,9 +41,9 @@ augroup vimrcEx
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
   autocmd BufReadPost *
-    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
 
   " Set syntax highlighting for specific file types
   autocmd BufRead,BufNewFile *.md set filetype=markdown
@@ -116,18 +116,20 @@ set numberwidth=5
 " will use completion if not at beginning
 set wildmode=list:longest,list:full
 function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<Tab>"
-    else
-        return "\<C-p>"
-    endif
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+    return "\<Tab>"
+  else
+    return "\<C-p>"
+  endif
 endfunction
 inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
 inoremap <S-Tab> <C-n>
 
 " Switch between the last two files
 nnoremap <Leader><Leader> <C-^>
+
+nnoremap <Leader>b :<C-u>call gitblame#echo()<CR>
 
 " vim-test mappings
 nnoremap <silent> <Leader>t :TestFile<CR>
@@ -172,25 +174,56 @@ if filereadable($HOME . "/.vimrc.local")
 endif
 "source /home/rbadmin/vim-dirdiff/plugin/dirdiff.vim
 call plug#begin()
-  Plug 'mtuckerb/vim-dirdiff'
-  Plug 'w0rp/ale'
-  Plug 'godlygeek/tabular'
-  Plug 'airblade/vim-gitgutter'
-  Plug 'tpope/vim-fugitive'
-  Plug 'rakr/vim-one'
-  Plug 'wakatime/vim-wakatime'
-  Plug 'scrooloose/nerdtree'
-  Plug 'Xuyuanp/nerdtree-git-plugin'
-  Plug 'bling/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'powerline/fonts'
-  Plug 'Yggdroot/indentLine'
-  Plug 'wincent/command-t', {
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-rails'
+Plug 'slim-template/vim-slim'
+Plug 'kien/ctrlp.vim'
+Plug 'will133/vim-dirdiff'
+Plug 'w0rp/ale'
+Plug 'godlygeek/tabular'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'rakr/vim-one'
+Plug 'wakatime/vim-wakatime'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'powerline/fonts'
+Plug 'Yggdroot/indentLine'
+Plug 'wincent/command-t', {
       \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
       \ }
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'zivyangll/git-blame.vim'
+Plug 'mileszs/ack.vim'
+Plug 'vim-syntastic/syntastic'
+Plug 'terryma/vim-smooth-scroll'
 call plug#end()
 
-colorscheme one
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+
+" colorscheme one
+colorscheme  Tomorrow-Night
 let g:indentLine_enabled = 1
 let g:indentLine_color_term = 234
 let g:indentLine_color_tty_light = 1
@@ -207,7 +240,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
 "" unicode symbols
@@ -250,8 +283,10 @@ set tags=./tags;
 nnoremap <leader>. :CtrlPTag<cr>
 
 if (&diff)
-   colorscheme github
-   nnoremap [ [m
-   nnoremap ] ]m
+  colorscheme github
+  nnoremap [ [m
+  nnoremap ] ]m
 endif
 
+set mouse=a
+let g:NERDTreeMouseMode=3

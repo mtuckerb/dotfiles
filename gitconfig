@@ -3,7 +3,7 @@
 [push]
   default = current
 [color]
-  ui = auto
+	ui = auto
 [alias]
   diffdir = difftool --dir-diff --tool=default-difftool --no-prompt
   aa = add --all
@@ -13,6 +13,7 @@
   co = checkout
   pf = push --force-with-lease
   st = status
+	d = diff -w
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
@@ -34,6 +35,7 @@
  #mnemonicPrefix = true
  # noprefix = true
  renameLimit = 2500
+	compactionHeuristic = true
 
 [difftool]
    prompt = false
@@ -47,3 +49,10 @@
 [user]
 	email = tucker@tuckerbradford.com
 	name = Tucker Bradford
+[pager]
+	diff = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"
+	log = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"
+	show = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"
+[color "diff"]
+	old = red dim
+	new = green italic
