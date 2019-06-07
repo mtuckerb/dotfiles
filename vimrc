@@ -216,11 +216,11 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
+let g:syntastic_quiet_messages = {'level': 'warnings'}
 
 " colorscheme one
 colorscheme  Tomorrow-Night
@@ -290,3 +290,7 @@ endif
 
 set mouse=a
 let g:NERDTreeMouseMode=3
+
+hi SpellCap ctermbg=238 guibg=#444444
+hi SpellBad ctermbg=238 guibg=#444444
+
