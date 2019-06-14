@@ -15,8 +15,15 @@ let g:has_async = v:version >= 800 || has('nvim')
 call plug#begin('~/.vim/bundle')
 
 " Define bundles via Github repos
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+"Plug 'xolox/vim-notes'
+"Plug 'xolox/vim-misc'
+Plug 'vim-scripts/vimwiki'
 Plug 'christoomey/vim-run-interactive'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
+Plug 'zxqfl/tabnine-vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'janko-m/vim-test'
@@ -34,6 +41,7 @@ Plug 'tpope/vim-rake'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/tComment'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
@@ -51,7 +59,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'zivyangll/git-blame.vim'
 Plug 'mileszs/ack.vim'
-Plug 'vim-syntastic/syntastic'
+"Plug 'vim-syntastic/syntastic'
+Plug 'gevann/vim-rg'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'w0rp/ale'
 

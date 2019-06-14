@@ -1,6 +1,4 @@
-" Leader
 let mapleader = " "
-execute pathogen#infect()
 set nocompatible
 set rtp+=~/.fzf
 set backspace=2   " Backspace deletes like most programs in insert mode
@@ -14,8 +12,6 @@ set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 set background=dark
-let g:DirDiffSimpleMap = 1
-let g:DirDiffTheme="github"
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -23,9 +19,7 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
 endif
 
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
+source ~/.vimrc.bundles
 
 " Load matchit.vim, but only if the user hasn't installed a newer version.
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
@@ -86,13 +80,14 @@ set list listchars=tab:»·,trail:·,nbsp:·
 " Use one space, not two, after punctuation.
 set nojoinspaces
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
+if executable('rg')
   " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
+  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+  command! -bang -nargs=* Rg call fzf#vim#grep( 'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
+  set grepprg=rg\ --vimgrep
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag --literal --files-with-matches --nocolor --hidden -g "" %s'
+  let g:ctrlp_user_command = 'rg --literal --files-with-matches --nocolor --hidden -g "" %s'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
@@ -158,6 +153,23 @@ nnoremap <C-l> <C-w>l
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
 
+nnoremap <C-p> :FZF <CR>
+
+"This would be a cool global search but it slows down ctrl-p so no
+"nnoremap <C-p>a :Rg 
+
+" --column: Show column number
+"  " --line-number: Show line number
+"  " --no-heading: Do not show file headings in results
+"  " --fixed-strings: Search term as a literal string
+"  " --ignore-case: Case insensitive search
+"  " --no-ignore: Do not respect .gitignore, etc...
+"  " --hidden: Search hidden files and folders
+"  " --follow: Follow symlinks
+"  " --glob: Additional conditions for search (in this case ignore everything in
+"  the .git/ folder)
+"  " --color: Search color options
+
 " Set spellfile to location that is guaranteed to exist, can be symlinked to
 " Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
 set spellfile=$HOME/.vim-spell-en.utf-8.add
@@ -172,35 +184,6 @@ set diffopt+=vertical
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
-"source /home/rbadmin/vim-dirdiff/plugin/dirdiff.vim
-call plug#begin()
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-rails'
-Plug 'slim-template/vim-slim'
-Plug 'kien/ctrlp.vim'
-Plug 'will133/vim-dirdiff'
-Plug 'w0rp/ale'
-Plug 'godlygeek/tabular'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'rakr/vim-one'
-Plug 'wakatime/vim-wakatime'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'powerline/fonts'
-Plug 'Yggdroot/indentLine'
-Plug 'wincent/command-t', {
-      \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
-      \ }
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'zivyangll/git-blame.vim'
-Plug 'mileszs/ack.vim'
-Plug 'vim-syntastic/syntastic'
-Plug 'terryma/vim-smooth-scroll'
-call plug#end()
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -212,15 +195,16 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"
+"let g:ale_sign_error = '🛑'
+"let g:ale_sign_warning = '⚠️'
+highlight ALEError ctermbg=darkgray
+highlight ALEWarning ctermbg=darkgray
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+hi SpellCap ctermbg=238 guibg=#444444
+hi SpellBad ctermbg=238 guibg=#444444
 
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_quiet_messages = {'level': 'warnings'}
 
 " colorscheme one
 colorscheme  Tomorrow-Night
@@ -291,6 +275,36 @@ endif
 set mouse=a
 let g:NERDTreeMouseMode=3
 
-hi SpellCap ctermbg=238 guibg=#444444
-hi SpellBad ctermbg=238 guibg=#444444
 
+
+" enable gtags module
+let g:gutentags_modules = ['ctags']
+let g:gutentags_project_root = ['.root', '.git']
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+ " change focus to quickfix window after search (optional).
+let g:gutentags_plus_switch = 1
+let g:gutentags_define_advanced_commands = 1
+let g:gutentags_ctags_executable_ruby = 'ctags'
+
+ " from https://github.com/janko-m/vim-test#setup
+ " map ctrl-t to run test under cursor
+nmap <silent> <C-T> :TestNearest<CR>
+ " map ctrl-l to return to run again last test
+nmap <silent> <C-L> :TestLast<CR>
+ " map ctrl-g to go to last test run
+nmap <silent> <C-G> :TestVisit<CR>
+ " map ctrl-a to go to last test run
+nmap <silent> <C-A> :TestFile<CR>
+
+"florent's test shortcuts
+let test#strategy="vimterminal"
+" use m to run test (from
+" https://github.com/janko-m/vim-test/wiki/Minitest#m-runner)
+let g:test#ruby#minitest#executable = 'm'
+ " make sure it is not run through bundle exec (from https://github.com/janko-m/vim-test#ruby)
+let test#ruby#bundle_exec = 0
+ " manually prepend spring (from https://github.com/janko-m/vim-test#executable)
+let test#ruby#m#executable = 'spring m'
+
+let g:DirDiffSimpleMap = 1
+let g:DirDiffTheme="github"
