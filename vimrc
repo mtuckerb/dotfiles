@@ -51,7 +51,15 @@ augroup END
 " ALE linting events
 augroup ale
   autocmd!
-
+  let g:ale_lint_delay = 1000
+  let g:ale_sign_error = 'ⓧ'
+  let g:ale_sign_warning = '❕'
+	highlight ALEError ctermbg=darkgray
+	highlight ALEWarning ctermbg=darkgray
+	highlight clear ALEErrorSign
+	highlight clear ALEWarningSign
+	hi SpellCap ctermbg=238 guibg=#444444
+	hi SpellBad ctermbg=238 guibg=#444444
   if g:has_async
     set updatetime=1000
     let g:ale_lint_on_text_changed = 0
@@ -62,6 +70,10 @@ augroup ale
   else
     echoerr "The thoughtbot dotfiles require NeoVim or Vim 8"
   endif
+  let g:ale_lint_on_text_changed = 'never'
+  " You can disable this option too
+  " " if you don't want linters to run on opening a file
+  let g:ale_lint_on_enter = 0
 augroup END
 
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
@@ -196,14 +208,6 @@ noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 "
-"let g:ale_sign_error = '🛑'
-"let g:ale_sign_warning = '⚠️'
-highlight ALEError ctermbg=darkgray
-highlight ALEWarning ctermbg=darkgray
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
-hi SpellCap ctermbg=238 guibg=#444444
-hi SpellBad ctermbg=238 guibg=#444444
 
 
 " colorscheme one
@@ -308,3 +312,8 @@ let test#ruby#m#executable = 'spring m'
 
 let g:DirDiffSimpleMap = 1
 let g:DirDiffTheme="github"
+
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'},
+                      \{'path': '~/exceed-wiki', 'syntax': 'markdown', 'ext': '.md'}]
+
+
