@@ -60,6 +60,8 @@ Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'zivyangll/git-blame.vim'
 Plug 'mileszs/ack.vim'
 Plug 'gevann/vim-rg'
+Plug 'pgr0ss/vim-github-url'
+
 Plug 'terryma/vim-smooth-scroll'
 Plug 'w0rp/ale'
 

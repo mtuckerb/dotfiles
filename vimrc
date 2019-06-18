@@ -313,7 +313,6 @@ let test#ruby#m#executable = 'spring m'
 let g:DirDiffSimpleMap = 1
 let g:DirDiffTheme="github"
 
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'},
-                      \{'path': '~/exceed-wiki', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [ {'path': '~/exceed-wiki', 'syntax': 'markdown', 'ext': '.md'}]
 
 
