@@ -260,12 +260,11 @@ let g:CommandTHighlightColor= 81
 let g:CommandTMatchWindowAtTop= 1
 
 set hidden
-nmap <leader>T :enew<cr>
-nmap <leader>l :bnext<CR>
-nmap <leader>h :bprevious<CR>
+nmap T :enew<cr>
+nmap l :bnext<CR>
+nmap h :bprevious<CR>
 nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <leader>bl :ls<CR>
-nmap <leader>t :CommandT<CR>
 
 :au FocusLost * silent! wa
 
@@ -316,7 +315,6 @@ let test#ruby#m#executable = 'spring m'
 let g:DirDiffSimpleMap = 1
 let g:DirDiffTheme="github"
 
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'},
-                      \{'path': '~/exceed-wiki', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [ {'path': '~/exceed-wiki', 'syntax': 'markdown', 'ext': '.md'}]
 
 
