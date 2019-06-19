@@ -257,12 +257,11 @@ let g:CommandTHighlightColor= 81
 let g:CommandTMatchWindowAtTop= 1
 
 set hidden
-nmap <leader>T :enew<cr>
-nmap <leader>l :bnext<CR>
-nmap <leader>h :bprevious<CR>
+nmap T :enew<cr>
+nmap l :bnext<CR>
+nmap h :bprevious<CR>
 nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <leader>bl :ls<CR>
-nmap <leader>t :CommandT<CR>
 
 :au FocusLost * silent! wa
 
