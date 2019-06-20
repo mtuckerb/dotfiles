@@ -166,6 +166,7 @@ nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
 
 nnoremap <C-p> :FZF <CR>
+nnoremap <C-f> :Rg<Cr>
 
 "This would be a cool global search but it slows down ctrl-p so no
 "nnoremap <C-p>a :Rg 
@@ -202,10 +203,10 @@ if executable('ag')
 endif
 
 
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+"noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+"noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+"noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+"noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 "
 
@@ -315,6 +316,5 @@ let test#ruby#m#executable = 'spring m'
 let g:DirDiffSimpleMap = 1
 let g:DirDiffTheme="github"
 
-let g:vimwiki_list = [ {'path': '~/exceed-wiki', 'syntax': 'markdown', 'ext': '.md'}]
 
 
