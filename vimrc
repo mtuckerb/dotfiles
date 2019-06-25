@@ -212,7 +212,10 @@ endif
 
 
 " colorscheme one
-colorscheme  Tomorrow-Night
+" colorscheme  Tomorrow-Night
+colorscheme tender
+" get rid of that aweful highlight color
+hi PMenu guifg=#5fd6fe ctermfg=111 guibg=#4e4e4e ctermbg=239 gui=NONE cterm=NONE
 let g:indentLine_enabled = 1
 let g:indentLine_color_term = 234
 let g:indentLine_color_tty_light = 1
@@ -224,7 +227,7 @@ let g:indentLine_setColors = 1
 let g:indentLine_concealcursor = 'inc'
 let g:indentLine_conceallevel = 2
 
-let g:airline_theme='bubblegum'
+let g:airline_theme='tender'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
