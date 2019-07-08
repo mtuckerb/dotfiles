@@ -51,7 +51,7 @@
 	email = tucker@tuckerbradford.com
 	name = Tucker Bradford
 [pager]
-	diff = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"
+	diff = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"| less -XF
 	log = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"
 	show = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"
 [color "diff"]
