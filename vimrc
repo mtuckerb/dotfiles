@@ -52,27 +52,25 @@ augroup END
 augroup ale
   autocmd!
   let g:ale_lint_delay = 1000
-  let g:ale_sign_error = 'ⓧ'
-  let g:ale_sign_warning = '❕'
   highlight ALEError ctermbg=darkgray
   highlight ALEWarning ctermbg=darkgray
   highlight clear ALEErrorSign
   highlight clear ALEWarningSign
+  let g:ale_sign_error = 'ⓧ'
+  let g:ale_sign_warning = '❕'
   hi SpellCap ctermbg=238 guibg=#444444
   hi SpellBad ctermbg=238 guibg=#444444
   if g:has_async
     set updatetime=1000
     let g:ale_lint_on_text_changed = 'never'
-    autocmd CursorHold * call ale#Queue(0)
-    autocmd CursorHoldI * call ale#Queue(0)
-    autocmd InsertEnter * call ale#Queue(0)
-    autocmd InsertLeave * call ale#Queue(0)
+    "autocmd CursorHold * call ale#Queue(0)
+    "autocmd CursorHoldI * call ale#Queue(0)
+    "autocmd InsertEnter * call ale#Queue(0)
+    "autocmd InsertLeave * call ale#Queue(0)
   else
     echoerr "The thoughtbot dotfiles require NeoVim or Vim 8"
   endif
   let g:ale_lint_on_text_changed = 'never'
-  " You can disable this option too
-  " " if you don't want linters to run on opening a file
   let g:ale_lint_on_enter = 0
   let g:ale_lint_on_insert_leave= 'never'
 augroup END
@@ -133,6 +131,12 @@ function! InsertTabWrapper()
     return "\<C-p>"
   endif
 endfunction
+
+vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!cat ~/.vimbuffer \| it2copy <CR><CR>
+
+" This makes leader gh open the URL in it2copy instead of trying to launch a
+" browser
+let g:gh_open_command = 'fn() { echo "$@" | it2copy; }; fn '
 
 " copy/paste from the command line (no Xterm) is rough in vim/tmux
 " This function and Leader + c helps by taking the current line of the current
@@ -324,14 +328,14 @@ nmap <silent> <C-A> :TestFile<CR>
 let test#strategy="vimterminal"
 " use m to run test (from
 " https://github.com/janko-m/vim-test/wiki/Minitest#m-runner)
-let g:test#ruby#minitest#executable = 'm'
-let g:test#ruby#rails#executable = 'm'
-let g:test#ruby#rspec#executable = 'm'
+let g:test#ruby#minitest#executable = 'spring m'
+let g:test#ruby#rails#executable = 'spring m'
+let g:test#ruby#rspec#executable = 'spring m'
 " make sure it is not run through bundle exec (from https://github.com/janko-m/vim-test#ruby)
 let test#ruby#bundle_exec = 0
 " manually prepend spring (from https://github.com/janko-m/vim-test#executable)
 let test#ruby#m#executable = 'spring m'
-
+let test#ruby#use_spring_binstub = 1
 let g:DirDiffSimpleMap = 1
 let g:DirDiffTheme="github"
 let lineText = getline('.')
@@ -339,5 +343,6 @@ let lineText = getline('.')
 "yank and put to tmux buffer
 nmap ty :Tyank<CR>
 nmap tp :Tput<CR>
+nmap <C-w> :bd<cr>
 autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . system("git rev-parse --show-toplevel | awk -F '/' '{print $NF}'") . "-" .  expand("%:t"))
 
