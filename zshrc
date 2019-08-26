@@ -1,5 +1,5 @@
 eval "$(rbenv init -)"
-export ZSH="/home/rbadmin/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
 ZSH_THEME=powerlevel10k/powerlevel10k
@@ -58,6 +58,7 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 _load_settings "$HOME/.zsh/configs"
+alias sock='export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 

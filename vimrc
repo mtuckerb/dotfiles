@@ -52,30 +52,30 @@ augroup END
 augroup ale
   autocmd!
   let g:ale_lint_delay = 1000
+  highlight ALEError ctermbg=darkgray
+  highlight ALEWarning ctermbg=darkgray
+  highlight clear ALEErrorSign
+  highlight clear ALEWarningSign
   let g:ale_sign_error = 'ⓧ'
   let g:ale_sign_warning = '❕'
-	highlight ALEError ctermbg=darkgray
-	highlight ALEWarning ctermbg=darkgray
-	highlight clear ALEErrorSign
-	highlight clear ALEWarningSign
-	hi SpellCap ctermbg=238 guibg=#444444
-	hi SpellBad ctermbg=238 guibg=#444444
+  hi SpellCap ctermbg=238 guibg=#444444
+  hi SpellBad ctermbg=238 guibg=#444444
   if g:has_async
     set updatetime=1000
-    let g:ale_lint_on_text_changed = 0
-    autocmd CursorHold * call ale#Queue(0)
-    autocmd CursorHoldI * call ale#Queue(0)
-    autocmd InsertEnter * call ale#Queue(0)
-    autocmd InsertLeave * call ale#Queue(0)
+    let g:ale_lint_on_text_changed = 'never'
+    "autocmd CursorHold * call ale#Queue(0)
+    "autocmd CursorHoldI * call ale#Queue(0)
+    "autocmd InsertEnter * call ale#Queue(0)
+    "autocmd InsertLeave * call ale#Queue(0)
   else
     echoerr "The thoughtbot dotfiles require NeoVim or Vim 8"
   endif
   let g:ale_lint_on_text_changed = 'never'
-  " You can disable this option too
-  " " if you don't want linters to run on opening a file
   let g:ale_lint_on_enter = 0
+  let g:ale_lint_on_insert_leave= 'never'
 augroup END
 
+  let g:ale_lint_on_text_changed = 0
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes.
 let g:is_posix = 1
@@ -122,6 +122,7 @@ set numberwidth=5
 " will insert tab at beginning of line,
 " will use completion if not at beginning
 set wildmode=list:longest,list:full
+
 function! InsertTabWrapper()
   let col = col('.') - 1
   if !col || getline('.')[col - 1] !~ '\k'
@@ -130,6 +131,23 @@ function! InsertTabWrapper()
     return "\<C-p>"
   endif
 endfunction
+
+vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!cat ~/.vimbuffer \| it2copy <CR><CR>
+
+" This makes leader gh open the URL in it2copy instead of trying to launch a
+" browser
+let g:gh_open_command = 'fn() { echo "$@" | it2copy; }; fn '
+
+" copy/paste from the command line (no Xterm) is rough in vim/tmux
+" This function and Leader + c helps by taking the current line of the current
+" file and opening it in less where you can copy paste normally
+
+function! Less()
+  silent !clear
+  execute "!" . "less" . " " . "+" . line('.') . " -j10  " . bufname("%")
+endfunction
+nnoremap <Leader>c :call Less() <CR>
+
 inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
 inoremap <S-Tab> <C-n>
 
@@ -191,7 +209,7 @@ set spellfile=$HOME/.vim-spell-en.utf-8.add
 set complete+=kspell
 
 " Always use vertical diffs
-set diffopt+=vertical
+set diffopt+=horizontal
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
@@ -291,34 +309,41 @@ let g:NERDTreeMouseMode=3
 let g:gutentags_modules = ['ctags']
 let g:gutentags_project_root = ['.root', '.git']
 let g:gutentags_cache_dir = expand('~/.cache/tags')
- " change focus to quickfix window after search (optional).
+" change focus to quickfix window after search (optional).
 let g:gutentags_plus_switch = 1
 let g:gutentags_define_advanced_commands = 1
 let g:gutentags_ctags_executable_ruby = 'ctags'
 
- " from https://github.com/janko-m/vim-test#setup
- " map ctrl-t to run test under cursor
+" from https://github.com/janko-m/vim-test#setup
+" map ctrl-t to run test under cursor
 nmap <silent> <C-T> :TestNearest<CR>
- " map ctrl-l to return to run again last test
+" map ctrl-l to return to run again last test
 nmap <silent> <C-L> :TestLast<CR>
- " map ctrl-g to go to last test run
+" map ctrl-g to go to last test run
 nmap <silent> <C-G> :TestVisit<CR>
- " map ctrl-a to go to last test run
+" map ctrl-a to go to last test run
 nmap <silent> <C-A> :TestFile<CR>
 
 "florent's test shortcuts
 let test#strategy="vimterminal"
 " use m to run test (from
 " https://github.com/janko-m/vim-test/wiki/Minitest#m-runner)
-let g:test#ruby#minitest#executable = 'm'
- " make sure it is not run through bundle exec (from https://github.com/janko-m/vim-test#ruby)
+let g:test#ruby#minitest#executable = 'spring m'
+let g:test#ruby#rails#executable = 'spring m'
+let g:test#ruby#rspec#executable = 'spring m'
+" make sure it is not run through bundle exec (from https://github.com/janko-m/vim-test#ruby)
 let test#ruby#bundle_exec = 0
- " manually prepend spring (from https://github.com/janko-m/vim-test#executable)
+" manually prepend spring (from https://github.com/janko-m/vim-test#executable)
 let test#ruby#m#executable = 'spring m'
-
+let test#ruby#use_spring_binstub = 1
 let g:DirDiffSimpleMap = 1
 let g:DirDiffTheme="github"
 "let g:vimwiki_list = [{'path': '~/vimwiki', 'auto_toc': 1}]
+let lineText = getline('.')
 
-
+"yank and put to tmux buffer
+nmap ty :Tyank<CR>
+nmap tp :Tput<CR>
+nmap <C-w> :bd<cr>
+autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . system("git rev-parse --show-toplevel | awk -F '/' '{print $NF}'") . "-" .  expand("%:t"))
 

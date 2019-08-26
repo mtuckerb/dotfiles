@@ -1,5 +1,5 @@
 [init]
-  templatedir = ~/.git_template
+	templatedir = ~/.git_template
 [push]
   default = current
 [color]
@@ -14,6 +14,7 @@
   pf = push --force-with-lease
   st = status
 	d = diff -w
+	ctags = !.git/hooks/ctags
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
@@ -50,7 +51,7 @@
 	email = tucker@tuckerbradford.com
 	name = Tucker Bradford
 [pager]
-	diff = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"
+	diff = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"| less -XF
 	log = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"
 	show = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"
 [color "diff"]
