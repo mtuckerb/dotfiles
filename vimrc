@@ -318,6 +318,7 @@ let test#ruby#m#executable = 'spring m'
 
 let g:DirDiffSimpleMap = 1
 let g:DirDiffTheme="github"
+"let g:vimwiki_list = [{'path': '~/vimwiki', 'auto_toc': 1}]
 
 
 

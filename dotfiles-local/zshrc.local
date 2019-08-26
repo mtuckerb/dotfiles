@@ -79,7 +79,6 @@ plugins=(
   dotenv
   osx
   rake
-  rbenv
   ruby
 )
 source $HOME/.oh-my-zsh/oh-my-zsh.sh

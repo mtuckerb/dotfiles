@@ -30,11 +30,11 @@
   path = ~/.gitconfig.local
 [diff]
   tool =  default-difftool
- colorMoved = zebra
- #suppressBlankEmpty = true
- #mnemonicPrefix = true
- # noprefix = true
- renameLimit = 2500
+  colorMoved = zebra
+  #suppressBlankEmpty = true
+  #mnemonicPrefix = true
+  # noprefix = true
+  renameLimit = 2500
 	compactionHeuristic = true
 
 [difftool]
@@ -56,3 +56,9 @@
 [color "diff"]
 	old = red dim
 	new = green italic
+[difftool "sourcetree"]
+	cmd = /usr/local/bin/bcomp -ro $LOCAL $REMOTE
+	path = 
+[mergetool "sourcetree"]
+	cmd = /usr/local/bin/bcomp $LOCAL $REMOTE $BASE $MERGED
+	trustExitCode = true
