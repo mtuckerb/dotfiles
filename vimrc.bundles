@@ -19,7 +19,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 "Plug 'xolox/vim-notes'
 "Plug 'xolox/vim-misc'
-Plug 'vim-scripts/vimwiki'
+Plug 'vimwiki/vimwiki'
 Plug 'christoomey/vim-run-interactive'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
