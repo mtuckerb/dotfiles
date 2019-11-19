@@ -12,6 +12,11 @@ set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 set background=dark
+if empty(glob('~/.vim/tmp'))
+    silent !mkdir -p ~/.vim/tmp
+endif
+set directory=$HOME/.vim/tmp
+
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -40,12 +45,12 @@ augroup vimrcEx
         \ endif
 
   " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
-  autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
-  autocmd BufRead,BufNewFile aliases.local,zshrc.local,*/zsh/configs/* set filetype=sh
-  autocmd BufRead,BufNewFile gitconfig.local set filetype=gitconfig
-  autocmd BufRead,BufNewFile tmux.conf.local set filetype=tmux
-  autocmd BufRead,BufNewFile vimrc.local set filetype=vim
+  autocmd BufRead, BufNewFile *.md set filetype=markdown
+  autocmd BufRead, BufNewFile .{jscs,jshint,eslint}rc set filetype=json
+  autocmd BufRead, BufNewFile aliases.local,zshrc.local,*/zsh/configs/* set filetype=sh
+  autocmd BufRead, BufNewFile gitconfig.local set filetype=gitconfig
+  autocmd BufRead, BufNewFile tmux.conf.local set filetype=tmux
+  autocmd BufRead, BufNewFile vimrc.local set filetype=vim
 augroup END
 
 " ALE linting events
@@ -345,5 +350,5 @@ let lineText = getline('.')
 nmap ty :Tyank<CR>
 nmap tp :Tput<CR>
 nmap <C-w> :bd<cr>
-autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . system("git rev-parse --show-toplevel | awk -F '/' '{print $NF}'") . "-" .  expand("%:t"))
+autocmd BufReadPost, FileReadPost, BufNewFile, BufEnter * call system("tmux rename-window " . system("git rev-parse --show-toplevel | awk -F '/' '{print $NF}'") . "-" .  expand("%:t"))
 
