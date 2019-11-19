@@ -70,6 +70,7 @@ Plug 'junegunn/gv.vim'
 Plug 'jparise/vim-graphql'
 Plug 'reinh/vim-makegreen'
 Plug 'ruanyl/vim-gh-line'
+Plug 'kablamo/vim-git-log'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
