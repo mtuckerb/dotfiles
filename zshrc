@@ -61,4 +61,3 @@ _load_settings "$HOME/.zsh/configs"
 alias sock='export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
