@@ -94,7 +94,9 @@ Plug 'mattn/webapi-vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
-
+Plug 'reinh/vim-makegreen'
+Plug 'ruanyl/vim-gh-line'
+Plug 'kablamo/vim-git-log'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local

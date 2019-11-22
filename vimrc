@@ -13,6 +13,11 @@ set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 set background=dark
+if empty(glob('~/.vim/tmp'))
+    silent !mkdir -p ~/.vim/tmp
+endif
+set directory=$HOME/.vim/tmp
+
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -41,12 +46,12 @@ augroup vimrcEx
         \ endif
 
   " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
-  autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
-  autocmd BufRead,BufNewFile aliases.local,zshrc.local,*/zsh/configs/* set filetype=sh
-  autocmd BufRead,BufNewFile gitconfig.local set filetype=gitconfig
-  autocmd BufRead,BufNewFile tmux.conf.local set filetype=tmux
-  autocmd BufRead,BufNewFile vimrc.local set filetype=vim
+  autocmd BufRead, BufNewFile *.md set filetype=markdown
+  autocmd BufRead, BufNewFile .{jscs,jshint,eslint}rc set filetype=json
+  autocmd BufRead, BufNewFile aliases.local,zshrc.local,*/zsh/configs/* set filetype=sh
+  autocmd BufRead, BufNewFile gitconfig.local set filetype=gitconfig
+  autocmd BufRead, BufNewFile tmux.conf.local set filetype=tmux
+  autocmd BufRead, BufNewFile vimrc.local set filetype=vim
 augroup END
 
 " ALE linting events
@@ -135,7 +140,7 @@ function! InsertTabWrapper()
   endif
 endfunction
 
-vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!cat ~/.vimbuffer \| it2copy <CR><CR>
+vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!~/.iterm2/it2copy ~/.vimbuffer<CR><CR>
 
 " This makes leader gh open the URL in it2copy instead of trying to launch a
 " browser
