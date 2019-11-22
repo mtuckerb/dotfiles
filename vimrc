@@ -137,7 +137,7 @@ function! InsertTabWrapper()
   endif
 endfunction
 
-vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!cat ~/.vimbuffer \| it2copy <CR><CR>
+vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!~/.iterm2/it2copy ~/.vimbuffer<CR><CR>
 
 " This makes leader gh open the URL in it2copy instead of trying to launch a
 " browser
