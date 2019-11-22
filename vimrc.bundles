@@ -17,8 +17,6 @@ call plug#begin('~/.vim/bundle')
 " Define bundles via Github repos
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-"Plug 'xolox/vim-notes'
-"Plug 'xolox/vim-misc'
 Plug 'vimwiki/vimwiki'
 Plug 'christoomey/vim-run-interactive'
 Plug 'ludovicchabant/vim-gutentags'
@@ -28,7 +26,6 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'janko-m/vim-test'
 Plug 'kchmck/vim-coffee-script'
-Plug 'pangloss/vim-javascript'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'slim-template/vim-slim'
 Plug 'tpope/vim-bundler'
@@ -44,7 +41,25 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/tComment'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/1.x',
+  \ 'for': [
+    \ 'javascript',
+    \ 'typescript',
+    \ 'css',
+    \ 'less',
+    \ 'scss',
+    \ 'json',
+    \ 'graphql',
+    \ 'markdown',
+    \ 'vue',
+    \ 'lua',
+    \ 'php',
+    \ 'python',
+    \ 'ruby',
+    \ 'html',
+    \ 'swift' ] }
 Plug 'will133/vim-dirdiff'
 Plug 'godlygeek/tabular'
 Plug 'airblade/vim-gitgutter'
@@ -61,15 +76,25 @@ Plug 'zivyangll/git-blame.vim'
 Plug 'mileszs/ack.vim'
 Plug 'gevann/vim-rg'
 Plug 'pgr0ss/vim-github-url'
-Plug 'jacoborus/tender.vim'
+Plug 'jacoborus/tender.vim' "a theme
 Plug 'terryma/vim-smooth-scroll'
 Plug 'w0rp/ale'
-Plug 'tpope/vim-tbone'
+Plug 'tpope/vim-tbone' "tmux basics
 Plug 'tpope/vim-cucumber'
-Plug 'junegunn/gv.vim'
+Plug 'junegunn/gv.vim' "git commit browser :GV to open
 Plug 'jparise/vim-graphql'
-Plug 'reinh/vim-makegreen'
-Plug 'ruanyl/vim-gh-line'
+Plug 'vim-scripts/ruby-matchit'
+Plug 'ap/vim-css-color'
+Plug 'sjl/gundo.vim' " View the vim undo tree
+Plug 'luochen1990/rainbow'
+Plug 'gregsexton/matchtag'
+Plug 'prettier/vim-prettier'
+Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local

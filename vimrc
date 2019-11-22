@@ -1,6 +1,7 @@
 let mapleader = " "
 set nocompatible
 set rtp+=~/.fzf
+set rtp+=~/.vim/bundle/tabnine-vim
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
 set nowritebackup
@@ -73,6 +74,8 @@ augroup ale
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_lint_on_enter = 0
   let g:ale_lint_on_insert_leave= 'never'
+  let g:ale_linter_aliases = {'js': ['css', 'javascript']}
+  let g:ale_linters = {'js': ['stylelint', 'eslint']}
 augroup END
 
   let g:ale_lint_on_text_changed = 0
@@ -148,8 +151,8 @@ function! Less()
 endfunction
 nnoremap <Leader>c :call Less() <CR>
 
-inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
-inoremap <S-Tab> <C-n>
+"inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
+"inoremap <S-Tab> <C-n>
 
 " Switch between the last two files
 nnoremap <Leader><Leader> <C-^>
@@ -174,10 +177,7 @@ set splitbelow
 set splitright
 
 " Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+nnoremap <C-k> :redraw! <CR>
 
 " Move between linting errors
 nnoremap ]r :ALENextWrap<CR>
@@ -245,10 +245,14 @@ let g:indentLine_setColors = 1
 let g:indentLine_concealcursor = 'inc'
 let g:indentLine_conceallevel = 2
 
-let g:airline_theme='tender'
+let g:airline_theme='tender' " was tender
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
+""let g:airline#extensions#tabline#fnamemod = ':t'
+"let g:airline#extensions#tabline#fnamemod=":s?NERD_tree_.*?Nerd Tree?,:t"
+"let g:airline#extensions#tabline#fnamemod=":s,:t"
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
+let g:airline_enable_fugitive=1
 
 set guifont=Source\ Code\ Pro\ for\ Powerline:h14
 
@@ -256,30 +260,7 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
-"" unicode symbols
-"    let g:airline_left_sep = '»'
-"    let g:airline_left_sep = '▶'
-"    let g:airline_right_sep = '«'
-"    let g:airline_right_sep = '◀'
-"    let g:airline_symbols.crypt = '🔒'
-"    let g:airline_symbols.linenr = '☰'
-"    let g:airline_symbols.linenr = '␊'
-"    let g:airline_symbols.linenr = '␤'
-"    let g:airline_symbols.linenr = '¶'
-"    let g:airline_symbols.maxlinenr = ''
-"    let g:airline_symbols.maxlinenr = '㏑'
-"    let g:airline_symbols.branch = '⎇'
-"    let g:airline_symbols.paste = 'ρ'
-"    let g:airline_symbols.paste = 'Þ'
-"    let g:airline_symbols.paste = '∥'
-"    let g:airline_symbols.spell = 'Ꞩ'
-"    let g:airline_symbols.notexists = 'Ɇ'
-"    let g:airline_symbols.whitespace = 'Ξ'
-"
 
-let g:CommandTCursorColor = 81
-let g:CommandTHighlightColor= 81
-let g:CommandTMatchWindowAtTop= 1
 
 set hidden
 nmap T :enew<cr>
@@ -291,6 +272,7 @@ nmap <leader>bl :ls<CR>
 :au FocusLost * silent! wa
 
 set tags=./tags;
+set tags+=gems.tags; 
 " Bind leader p to ctag search
 nnoremap <leader>. :CtrlPTag<cr>
 
@@ -302,8 +284,7 @@ endif
 
 set mouse=a
 let g:NERDTreeMouseMode=3
-
-
+nnoremap <C-e> :NERDTreeToggle<CR>
 
 " enable gtags module
 let g:gutentags_modules = ['ctags']
@@ -346,4 +327,16 @@ nmap ty :Tyank<CR>
 nmap tp :Tput<CR>
 nmap <C-w> :bd<cr>
 autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . system("git rev-parse --show-toplevel | awk -F '/' '{print $NF}'") . "-" .  expand("%:t"))
+" Workaround for OSX filesystem chroot
+cmap w!! %!sudo tee > /dev/null 
+runtime macros/emojis.vim
 
+
+let g:user_emmet_leader_key='<Leader> <Tab>'
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
+
+"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
