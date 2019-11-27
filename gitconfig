@@ -56,9 +56,6 @@
 	diff = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"| less -XF
 	log = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"
 	show = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"
-[color "diff"]
-	old = red dim
-	new = green italic
 [difftool "sourcetree"]
 	cmd = /usr/local/bin/bcomp -ro $LOCAL $REMOTE
 	path = 
@@ -71,4 +68,4 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 [github]
-	user = mtuckerb
+  user = mtuckerb
