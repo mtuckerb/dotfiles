@@ -1,13 +1,14 @@
-eval "$(rbenv init -)"
 export ZSH="$HOME/.oh-my-zsh"
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 export SERGE_DATABASE="DBI:SQLite:dbname=$HOME/.serge/db/intellum.db3"
 export SERGE_DATA_DIR="$HOME/.serge"
 export PATH="$PATH:$HOME/.serge/serge/bin/"
-
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 ZSH_THEME=powerlevel10k/powerlevel10k
-source ~/.purepower
+#source ~/.purepower
 
 for function in ~/.zsh/functions/*; do
   source $function
