@@ -1,13 +1,14 @@
-eval "$(rbenv init -)"
 export ZSH="$HOME/.oh-my-zsh"
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 export SERGE_DATABASE="DBI:SQLite:dbname=$HOME/.serge/db/intellum.db3"
 export SERGE_DATA_DIR="$HOME/.serge"
 export PATH="$PATH:$HOME/.serge/serge/bin/"
-
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 ZSH_THEME=powerlevel10k/powerlevel10k
-source ~/.purepower
+#source ~/.purepower
 
 for function in ~/.zsh/functions/*; do
   source $function
@@ -65,3 +66,6 @@ _load_settings "$HOME/.zsh/configs"
 alias sock='export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh

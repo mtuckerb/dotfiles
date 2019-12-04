@@ -4,6 +4,7 @@ alias ln="ln -v"
 alias mkdir="mkdir -p"
 alias e="$EDITOR"
 alias v="$VISUAL"
+alias bfg="java -jar /usr/local/bin/bfg-1.13.0.jar"
 
 # Bundler
 alias b="bundle"
@@ -17,3 +18,5 @@ alias path='echo $PATH | tr -s ":" "\n"'
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
+
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
