@@ -44,7 +44,25 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/tComment'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/1.x',
+  \ 'for': [
+    \ 'javascript',
+    \ 'typescript',
+    \ 'css',
+    \ 'less',
+    \ 'scss',
+    \ 'json',
+    \ 'graphql',
+    \ 'markdown',
+    \ 'vue',
+    \ 'lua',
+    \ 'php',
+    \ 'python',
+    \ 'ruby',
+    \ 'html',
+    \ 'swift' ] }
 Plug 'will133/vim-dirdiff'
 Plug 'godlygeek/tabular'
 Plug 'airblade/vim-gitgutter'
