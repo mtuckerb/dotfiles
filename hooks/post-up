@@ -30,3 +30,8 @@ fi
 if [ -f $HOME/.oh-my-zsh/themes/powerlevel10k/ ]; then
   git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k/
 fi
+
+if [ -f $HOME/bin/git-brage ]; then
+  git clone https://github.com/alikins/gitconfig.git && cd gitconfig && sh install
+fi
+

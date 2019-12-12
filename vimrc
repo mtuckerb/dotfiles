@@ -83,7 +83,7 @@ augroup ale
   let g:ale_linters = {'js': ['stylelint', 'eslint']}
 augroup END
 
-  let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_text_changed = 0
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes.
 let g:is_posix = 1
@@ -237,9 +237,6 @@ endif
 " colorscheme one
 " colorscheme  Tomorrow-Night
 colorscheme tender
-if (has("termguicolors"))
-  set termguicolors
-endif
 
 " get rid of that aweful highlight color
 hi PMenu guifg=#5fd6fe ctermfg=111 guibg=#4e4e4e ctermbg=239 gui=NONE cterm=NONE
@@ -349,4 +346,5 @@ let g:user_emmet_settings = {
     \  },
   \}
 
-"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+let g:rainbow_active = 1

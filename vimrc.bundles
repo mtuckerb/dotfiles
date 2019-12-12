@@ -86,20 +86,20 @@ Plug 'jparise/vim-graphql'
 Plug 'vim-scripts/ruby-matchit'
 Plug 'ap/vim-css-color'
 Plug 'sjl/gundo.vim' " View the vim undo tree
-Plug 'luochen1990/rainbow'
 Plug 'gregsexton/matchtag' "matches HTML tags
+Plug 'luochen1990/rainbow' "rainbow parens
 Plug 'prettier/vim-prettier'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
+"Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
-Plug 'reinh/vim-makegreen'
+"Plug 'reinh/vim-makegreen'
 Plug 'ruanyl/vim-gh-line'
 Plug 'kablamo/vim-git-log'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'othree/yajs.vim'
-Plug 'mhartington/oceanic-next'
 
 
 if filereadable(expand("~/.vimrc.bundles.local"))
