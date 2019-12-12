@@ -80,7 +80,7 @@ augroup ale
   let g:ale_lint_on_enter = 0
   let g:ale_lint_on_insert_leave= 'never'
   let g:ale_linter_aliases = {'js': ['css', 'javascript']}
-  let g:ale_linters = {'js': ['stylelint', 'eslint']}
+  let g:ale_linters = {'js': ['stylelint', 'eslint'], 'ruby': ['rubocop', 'standardrb']}
 augroup END
 
 let g:ale_lint_on_text_changed = 0
