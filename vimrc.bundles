@@ -97,6 +97,11 @@ Plug 'leafgarland/typescript-vim'
 Plug 'reinh/vim-makegreen'
 Plug 'ruanyl/vim-gh-line'
 Plug 'kablamo/vim-git-log'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-commentary'
+Plug 'othree/yajs.vim'
+Plug 'mhartington/oceanic-next'
+
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
