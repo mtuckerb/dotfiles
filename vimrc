@@ -324,7 +324,7 @@ let g:test#ruby#rails#executable = 'spring m'
 let g:test#ruby#rspec#executable = 'spring m'
 " make sure it is not run through bundle exec (from https://github.com/janko-m/vim-test#ruby)
 let test#ruby#bundle_exec = 0
-" manually prepend spring (from https://github.com/janko-m/vim-test#executable)
+" manually prepend spring (from https://github.com/janko-m/vim-test#executable)
 let test#ruby#m#executable = 'spring m'
 let test#ruby#use_spring_binstub = 1
 let g:DirDiffSimpleMap = 1
