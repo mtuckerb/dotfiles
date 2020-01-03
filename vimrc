@@ -103,7 +103,7 @@ set nojoinspaces
 if executable('rg')
   " Use Ag over Grep
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-  command! -bang -nargs=* Rg call fzf#vim#grep( 'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
+  command! -bang -nargs=* Ripgrep call fzf#vim#grep( 'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
   set grepprg=rg\ --vimgrep
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
@@ -189,7 +189,7 @@ nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
 
 nnoremap <C-p> :FZF <CR>
-nnoremap <C-f> :Rg<Cr>
+nnoremap <C-f> :Ripgrep<Cr>
 
 "This would be a cool global search but it slows down ctrl-p so no
 "nnoremap <C-p>a :Rg 
