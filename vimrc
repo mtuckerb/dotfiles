@@ -348,3 +348,6 @@ let g:user_emmet_settings = {
 
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 let g:rainbow_active = 1
+
+" quickfix-reflector
+let g:qf_join_changes = 1 " allow undo as a single operation per buffer
