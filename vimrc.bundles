@@ -86,8 +86,8 @@ Plug 'jparise/vim-graphql'
 Plug 'vim-scripts/ruby-matchit'
 Plug 'ap/vim-css-color'
 Plug 'sjl/gundo.vim' " View the vim undo tree
+Plug 'gregsexton/matchtag' "matches HTML tags
 Plug 'luochen1990/rainbow' "rainbow parens
-Plug 'gregsexton/matchtag'
 Plug 'prettier/vim-prettier'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
