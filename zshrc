@@ -67,6 +67,8 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 _load_settings "$HOME/.zsh/configs"
 alias sock='export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock'
+alias ptest='RAILS_ENV=test rake parallel:migrate && rake parallel:test'
+alias burnpack='bundle install && yarn install && webpack && RAILS_ENV=test bundle exec webpack'
 
 plugins=(
   git

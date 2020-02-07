@@ -103,7 +103,7 @@ set nojoinspaces
 if executable('rg')
   " Use Ag over Grep
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-  command! -bang -nargs=* Rg call fzf#vim#grep( 'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
+  command! -bang -nargs=* Ripgrep call fzf#vim#grep( 'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0 )
   set grepprg=rg\ --vimgrep
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
@@ -189,7 +189,7 @@ nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
 
 nnoremap <C-p> :FZF <CR>
-nnoremap <C-f> :Rg<Cr>
+nnoremap <C-f> :Ripgrep<Cr>
 
 "This would be a cool global search but it slows down ctrl-p so no
 "nnoremap <C-p>a :Rg 
@@ -237,9 +237,6 @@ endif
 " colorscheme one
 " colorscheme  Tomorrow-Night
 colorscheme tender
-if (has("termguicolors"))
-  set termguicolors
-endif
 
 " get rid of that aweful highlight color
 hi PMenu guifg=#5fd6fe ctermfg=111 guibg=#4e4e4e ctermbg=239 gui=NONE cterm=NONE
@@ -326,7 +323,7 @@ let g:test#ruby#rspec#executable = 'spring m'
 let test#ruby#bundle_exec = 0
 " manually prepend spring (from https://github.com/janko-m/vim-test#executable)
 let test#ruby#m#executable = 'spring m'
-let test#ruby#use_spring_binstub = 1
+let test#ruby#use_spring_binstub = 0
 let g:DirDiffSimpleMap = 1
 let g:DirDiffTheme="github"
 "let g:vimwiki_list = [{'path': '~/vimwiki', 'auto_toc': 1}]

@@ -101,7 +101,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'othree/yajs.vim'
 Plug 'mhartington/oceanic-next'
-
+Plug 'jremmen/vim-ripgrep'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
