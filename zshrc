@@ -69,6 +69,7 @@ _load_settings "$HOME/.zsh/configs"
 alias sock='export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock'
 alias ptest='RAILS_ENV=test rake parallel:migrate && rake parallel:test'
 alias burnpack='bundle install && yarn install && webpack && RAILS_ENV=test bundle exec webpack'
+alias be='bundle exec'
 
 plugins=(
   git
@@ -81,8 +82,8 @@ plugins=(
 )
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+export PATH="$HOME/.rbenv/bin:$PATH"

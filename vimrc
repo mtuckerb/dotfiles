@@ -80,10 +80,10 @@ augroup ale
   let g:ale_lint_on_enter = 0
   let g:ale_lint_on_insert_leave= 'never'
   let g:ale_linter_aliases = {'js': ['css', 'javascript']}
-  let g:ale_linters = {'js': ['stylelint', 'eslint']}
+  let g:ale_linters = {'js': ['stylelint', 'eslint'], 'ruby': ['rubocop', 'standardrb']}
 augroup END
 
-  let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_text_changed = 0
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes.
 let g:is_posix = 1
@@ -103,7 +103,7 @@ set nojoinspaces
 if executable('rg')
   " Use Ag over Grep
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-  command! -bang -nargs=* Ripgrep call fzf#vim#grep( 'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0 )
+  command! -bang -nargs=* Ripgrep call fzf#vim#grep( 'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
   set grepprg=rg\ --vimgrep
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
@@ -316,9 +316,9 @@ nmap <silent> <C-A> :TestFile<CR>
 let test#strategy="vimterminal"
 " use m to run test (from
 " https://github.com/janko-m/vim-test/wiki/Minitest#m-runner)
-let g:test#ruby#minitest#executable = 'spring m'
-let g:test#ruby#rails#executable = 'spring m'
-let g:test#ruby#rspec#executable = 'spring m'
+let g:test#ruby#minitest#executable = 'm'
+let g:test#ruby#rails#executable = ' m'
+let g:test#ruby#rspec#executable = ' m'
 " make sure it is not run through bundle exec (from https://github.com/janko-m/vim-test#ruby)
 let test#ruby#bundle_exec = 0
 " manually prepend spring (from https://github.com/janko-m/vim-test#executable)
@@ -346,4 +346,33 @@ let g:user_emmet_settings = {
     \  },
   \}
 
-"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+let g:rainbow_active = 1
+
+" quickfix-reflector
+let g:qf_join_changes = 1 " allow undo as a single operation per buffer
+
+command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
+function! s:RunShellCommand(cmdline)
+  let isfirst = 1
+  let words = []
+  for word in split(a:cmdline)
+    if isfirst
+      let isfirst = 0  " don't change first word (shell command)
+    else
+      if word[0] =~ '\v[%#<]'
+        let word = expand(word)
+      endif
+      let word = shellescape(word, 1)
+    endif
+    call add(words, word)
+  endfor
+  let expanded_cmdline = join(words)
+  botright new
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  call setline(1, 'You entered:  ' . a:cmdline)
+  call setline(2, 'Expanded to:  ' . expanded_cmdline)
+  call append(line('$'), substitute(getline(2), '.', '=', 'g'))
+  silent execute '$read !'. expanded_cmdline
+  1
+endfunction
