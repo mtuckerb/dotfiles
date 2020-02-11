@@ -333,7 +333,7 @@ let lineText = getline('.')
 nmap ty :Tyank<CR>
 nmap tp :Tput<CR>
 nmap <C-w> :bd<cr>
-autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . system("git rev-parse --show-toplevel | awk -F '/' '{print $NF}'") . "-" .  expand("%:t"))
+autocmd BufReadPost, FileReadPost, BufNewFile, BufEnter * call system("tmux rename-window " . system("git rev-parse --show-toplevel | awk -F '/' '{print $NF}'") . "-" .  expand("%:t"))
 " Workaround for OSX filesystem chroot
 cmap w!! %!sudo tee > /dev/null 
 runtime macros/emojis.vim
