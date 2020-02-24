@@ -278,8 +278,8 @@ nmap <leader>bl :ls<CR>
 
 :au FocusLost * silent! wa
 
-set tags=./tags;
-set tags+=gems.tags; 
+"set tags=./tags;
+"set tags+=gems.tags; 
 " Bind leader p to ctag search
 nnoremap <leader>. :CtrlPTag<cr>
 
