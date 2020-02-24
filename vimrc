@@ -321,10 +321,9 @@ let g:test#ruby#rails#executable = ' m'
 let g:test#ruby#rspec#executable = ' m'
 " make sure it is not run through bundle exec (from https://github.com/janko-m/vim-test#ruby)
 let test#ruby#bundle_exec = 0
-" manually prepend  (from https://github.com/janko-m/vim-test#executable)
-let test#ruby#m#executable = ' m'
-let test#ruby#use__binstub = 1
-
+" manually prepend spring (from https://github.com/janko-m/vim-test#executable)
+let test#ruby#m#executable = 'spring m'
+let test#ruby#use_spring_binstub = 0
 let g:DirDiffSimpleMap = 1
 let g:DirDiffTheme="github"
 "let g:vimwiki_list = [{'path': '~/vimwiki', 'auto_toc': 1}]
@@ -334,7 +333,7 @@ let lineText = getline('.')
 nmap ty :Tyank<CR>
 nmap tp :Tput<CR>
 nmap <C-w> :bd<cr>
-autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . system("git rev-parse --show-toplevel | awk -F '/' '{print $NF}'") . "-" .  expand("%:t"))
+autocmd BufReadPost, FileReadPost, BufNewFile, BufEnter * call system("tmux rename-window " . system("git rev-parse --show-toplevel | awk -F '/' '{print $NF}'") . "-" .  expand("%:t"))
 " Workaround for OSX filesystem chroot
 cmap w!! %!sudo tee > /dev/null 
 runtime macros/emojis.vim
@@ -352,3 +351,28 @@ let g:rainbow_active = 1
 
 " quickfix-reflector
 let g:qf_join_changes = 1 " allow undo as a single operation per buffer
+
+command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
+function! s:RunShellCommand(cmdline)
+  let isfirst = 1
+  let words = []
+  for word in split(a:cmdline)
+    if isfirst
+      let isfirst = 0  " don't change first word (shell command)
+    else
+      if word[0] =~ '\v[%#<]'
+        let word = expand(word)
+      endif
+      let word = shellescape(word, 1)
+    endif
+    call add(words, word)
+  endfor
+  let expanded_cmdline = join(words)
+  botright new
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  call setline(1, 'You entered:  ' . a:cmdline)
+  call setline(2, 'Expanded to:  ' . expanded_cmdline)
+  call append(line('$'), substitute(getline(2), '.', '=', 'g'))
+  silent execute '$read !'. expanded_cmdline
+  1
+endfunction
