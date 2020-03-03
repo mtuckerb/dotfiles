@@ -54,8 +54,8 @@
 	name = Tucker Bradford
 [pager]
 	diff = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"| less -XF
-	log = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"
-	show = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"
+	log = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\" | less -XF
+	show = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\" | less -XF
 [difftool "sourcetree"]
 	cmd = /usr/local/bin/bcomp -ro $LOCAL $REMOTE
 	path = 
