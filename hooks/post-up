@@ -34,4 +34,5 @@ fi
 if [ -f $HOME/bin/git-brage ]; then
   git clone https://github.com/alikins/gitconfig.git && cd gitconfig && sh install
 fi
+npm install -g diff-so-fancy
 
