@@ -3,10 +3,10 @@
 [push]
   default = current
 [color]
-	ui = auto
+  ui = false
+  branch = true
+  status = true
 [color "diff"]
-  # meta = yellow bold
-  # meta = #00 bold
   meta = #ff0ab3
   frag = magenta
   plain = white bold
@@ -18,7 +18,6 @@
   added = yellow
   changed = green
   untracked = cyan
-
 [alias]
   diffdir = difftool --dir-diff --tool=default-difftool --no-prompt
   aa = add --all
@@ -39,7 +38,7 @@
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = diff-so-fancy | less --tabs=4 -RXF
 [merge]
   ff = only
 	tool = vimdiff
@@ -53,29 +52,19 @@
   path = ~/.gitconfig.local
 [diff]
   tool =  default-difftool
-  colorMoved = zebra
-  #suppressBlankEmpty = true
-  #mnemonicPrefix = true
-  # noprefix = true
-  renameLimit = 2500
-	compactionHeuristic = true
-
+#  colorMoved = zebra
+ # renameLimit = 2500
+#	compactionHeuristic = true
 [difftool]
    prompt = false
-
 [difftool "default-difftool"]
    cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE '+syntax off'
-
 [difftool "bcomp"]
    cmd = bcomp \"$LOCAL\" \"$REMOTE\"
    trustExitCode = true
 [user]
 	email = tucker@tuckerbradford.com
 	name = Tucker Bradford
-#[pager]
-#  diff = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"| diff-so-fancy| less -XFR --tabs=4
-#	log = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\" | less -XF
-#	show = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\" | less -XF
 [difftool "sourcetree"]
 	cmd = /usr/local/bin/bcomp -ro $LOCAL $REMOTE
 	path = 

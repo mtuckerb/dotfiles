@@ -32,7 +32,7 @@ if [ -f $HOME/.oh-my-zsh/themes/powerlevel10k/ ]; then
 fi
 
 if [ -f $HOME/bin/git-brage ]; then
-  git clone https://github.com/alikins/gitconfig.git && cd gitconfig && sh install
+  git clone https://github.com/alikins/gitconfig.git git tools && cd gitconfig && sh install.sh
 fi
 npm install -g diff-so-fancy
 
