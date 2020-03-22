@@ -73,16 +73,19 @@ augroup ale
     "autocmd CursorHoldI * call ale#Queue(0)
     "autocmd InsertEnter * call ale#Queue(0)
     "autocmd InsertLeave * call ale#Queue(0)
-  else
-    echoerr "The thoughtbot dotfiles require NeoVim or Vim 8"
   endif
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_lint_on_enter = 0
   let g:ale_lint_on_insert_leave= 'never'
   let g:ale_linter_aliases = {'js': ['css', 'javascript']}
-  let g:ale_linters = {'js': ['stylelint', 'eslint'], 'ruby': ['rubocop', 'standardrb']}
+  let g:ale_linters = {'js': ['prettier','stylelint', 'eslint'], 'ruby': ['rubocop']}
+  let g:ale_fixers = {
+        \   'javascript': ['prettier'],
+        \   'css': ['prettier'],
+        \   'ruby': ['rubocop']
+        \}
 augroup END
-
+nnoremap <Leader><Leader>f :ALEFix<CR>
 let g:ale_lint_on_text_changed = 0
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes.
@@ -163,7 +166,6 @@ nnoremap <Leader>c :call Less() <CR>
 nnoremap <Leader><Leader> <C-^>
 
 nnoremap <Leader>b :<C-u>call gitblame#echo()<CR>
-
 " vim-test mappings
 nnoremap <silent> <Leader>t :TestFile<CR>
 nnoremap <silent> <Leader>s :TestNearest<CR>
@@ -346,7 +348,7 @@ let g:user_emmet_settings = {
     \  },
   \}
 
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html,*.rb PrettierAsync
 let g:rainbow_active = 1
 
 " quickfix-reflector
