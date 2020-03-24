@@ -74,11 +74,16 @@ augroup ale
     "autocmd InsertEnter * call ale#Queue(0)
     "autocmd InsertLeave * call ale#Queue(0)
   endif
+  let g:ale_ruby_rubocop_options = '-c ~/client_engineering/rubocop.yml --ignore-parent-exclusion' 
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_lint_on_enter = 0
   let g:ale_lint_on_insert_leave= 'never'
+  let g:ale_lint_save = 'true'
   let g:ale_linter_aliases = {'js': ['css', 'javascript']}
-  let g:ale_linters = {'js': ['prettier','stylelint', 'eslint'], 'ruby': ['rubocop']}
+  let g:ale_linters = {
+        \   'javascript': ['prettier','stylelint', 'eslint'], 
+        \   'ruby': ['rubocop']}
+  let g:ale_linters_explicit=1
   let g:ale_fixers = {
         \   'javascript': ['prettier'],
         \   'css': ['prettier'],
@@ -86,6 +91,8 @@ augroup ale
         \}
 augroup END
 nnoremap <Leader><Leader>f :ALEFix<CR>
+nnoremap confe :e $MYVIMRC<CR>
+nnoremap confr :source $MYVIMRC<CR>
 let g:ale_lint_on_text_changed = 0
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes.
