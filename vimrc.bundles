@@ -21,7 +21,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'christoomey/vim-run-interactive'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
-Plug 'zxqfl/tabnine-vim'
+"Plug 'zxqfl/tabnine-vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'janko-m/vim-test'
@@ -62,7 +62,7 @@ Plug 'prettier/vim-prettier', {
     \ 'swift' ] }
 Plug 'will133/vim-dirdiff'
 Plug 'godlygeek/tabular'
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 Plug 'rakr/vim-one'
 Plug 'wakatime/vim-wakatime'
 Plug 'scrooloose/nerdtree'
@@ -102,7 +102,18 @@ Plug 'tpope/vim-commentary'
 Plug 'othree/yajs.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'jremmen/vim-ripgrep'
-
+Plug 'junegunn/vim-peekaboo'
+Plug 'nelstrom/vim-visual-star-search'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-tabnine', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
 endif
