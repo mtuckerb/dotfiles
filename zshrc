@@ -5,7 +5,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 export SERGE_DATABASE="DBI:SQLite:dbname=$HOME/.serge/db/intellum.db3"
 export SERGE_DATA_DIR="$HOME/.serge"
-export PATH="$PATH:$HOME/.serge/serge/bin/"
+export PATH="$PATH:$HOME/.serge/serge/bin/:$HOME/bin"
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -17,8 +17,6 @@ for function in ~/.zsh/functions/*; do
   source $function
 done
 
-
-plugins=(git)
 
 
 # extra files in ~/.zsh/configs/pre , ~/.zsh/configs , and ~/.zsh/configs/post
@@ -88,3 +86,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/bin:$PATH"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

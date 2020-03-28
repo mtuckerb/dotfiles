@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 touch "$HOME"/.psqlrc.local
 
@@ -27,11 +27,16 @@ rename the file to \`zprofile':
 MSG
 fi
 
-if [ -f $HOME/.oh-my-zsh/themes/powerlevel10k/ ]; then
+if [ ! -d $HOME/.oh-my-zsh/themes/powerlevel10k/ ]; then
   git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k/
+else
+  echo "p10k already installed"
 fi
 
-if [ -f $HOME/bin/git-brage ]; then
-  git clone https://github.com/alikins/gitconfig.git && cd gitconfig && sh install
+if [ ! -d $HOME/bin/git-brage ]; then
+  mkdir ~/bin
+  git clone https://github.com/alikins/gitconfig.git gittools && cd gittools && sh install.sh
+else
+  echo "gittools already installed"
 fi
-
+sudo npm install -g diff-so-fancy

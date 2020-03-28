@@ -13,6 +13,16 @@ set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 set background=dark
+set cmdheight=2
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
+
 if empty(glob('~/.vim/tmp'))
     silent !mkdir -p ~/.vim/tmp
 endif
@@ -73,16 +83,26 @@ augroup ale
     "autocmd CursorHoldI * call ale#Queue(0)
     "autocmd InsertEnter * call ale#Queue(0)
     "autocmd InsertLeave * call ale#Queue(0)
-  else
-    echoerr "The thoughtbot dotfiles require NeoVim or Vim 8"
   endif
+  let g:ale_ruby_rubocop_options = '-c ~/client_engineering/rubocop.yml --ignore-parent-exclusion' 
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_lint_on_enter = 0
   let g:ale_lint_on_insert_leave= 'never'
+  let g:ale_lint_save = 'true'
   let g:ale_linter_aliases = {'js': ['css', 'javascript']}
-  let g:ale_linters = {'js': ['stylelint', 'eslint'], 'ruby': ['rubocop', 'standardrb']}
+  let g:ale_linters = {
+        \   'javascript': ['prettier','stylelint', 'eslint'], 
+        \   'ruby': ['rubocop']}
+  let g:ale_linters_explicit=1
+  let g:ale_fixers = {
+        \   'javascript': ['prettier'],
+        \   'css': ['prettier'],
+        \   'ruby': ['rubocop']
+        \}
 augroup END
-
+nnoremap <Leader><Leader>f :ALEFix<CR>
+nnoremap confe :e $MYVIMRC<CR>
+nnoremap confr :source $MYVIMRC<CR>
 let g:ale_lint_on_text_changed = 0
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes.
@@ -163,7 +183,6 @@ nnoremap <Leader>c :call Less() <CR>
 nnoremap <Leader><Leader> <C-^>
 
 nnoremap <Leader>b :<C-u>call gitblame#echo()<CR>
-
 " vim-test mappings
 nnoremap <silent> <Leader>t :TestFile<CR>
 nnoremap <silent> <Leader>s :TestNearest<CR>
@@ -346,7 +365,7 @@ let g:user_emmet_settings = {
     \  },
   \}
 
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html,*.rb PrettierAsync
 let g:rainbow_active = 1
 
 " quickfix-reflector
@@ -376,3 +395,32 @@ function! s:RunShellCommand(cmdline)
   silent execute '$read !'. expanded_cmdline
   1
 endfunction
+
+" Automatically install all needed coc extensions
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+

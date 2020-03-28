@@ -3,13 +3,27 @@
 [push]
   default = current
 [color]
-	ui = auto
+  ui = false
+  branch = true
+  status = true
+[color "diff"]
+  meta = #ff0ab3
+  frag = magenta
+  plain = white bold
+  old = red bold
+  new = green bold
+  commit = yellow bold
+  func = green dim
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
 [alias]
   diffdir = difftool --dir-diff --tool=default-difftool --no-prompt
   aa = add --all
   ap = add --patch
   branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
-  ci = commit -v
+  c = commit -v
   co = checkout
   pf = push --force-with-lease
   st = status
@@ -17,9 +31,14 @@
 	ctags = !.git/hooks/ctags
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	lgbw = log  --graph --pretty=format:'%h - %d %s (%cr) <%an>'
+  m = checkout master
+	find = "!f() { (git branch -a ; git ls-files) | grep $1; GIT_PAGER=cat git grep $1; }; f"
+	brageall = !git brage refs/remotes
+  churn = !git log -M -C --name-only --format=\"format:%n\" | grep . | sort | uniq -c | sort -n
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
+	pager = diff-so-fancy | less --tabs=4 -RXF
 [merge]
   ff = only
 	tool = vimdiff
@@ -33,29 +52,19 @@
   path = ~/.gitconfig.local
 [diff]
   tool =  default-difftool
-  colorMoved = zebra
-  #suppressBlankEmpty = true
-  #mnemonicPrefix = true
-  # noprefix = true
-  renameLimit = 2500
-	compactionHeuristic = true
-
+#  colorMoved = zebra
+ # renameLimit = 2500
+#	compactionHeuristic = true
 [difftool]
    prompt = false
-
 [difftool "default-difftool"]
    cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE '+syntax off'
-
 [difftool "bcomp"]
    cmd = bcomp \"$LOCAL\" \"$REMOTE\"
    trustExitCode = true
 [user]
 	email = tucker@tuckerbradford.com
 	name = Tucker Bradford
-[pager]
-	diff = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\"| less -XF
-	log = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\" | less -XF
-	show = sed \"s/^\\([^-+ ]*\\)[-+ ]/\\\\1/\" | less -XF
 [difftool "sourcetree"]
 	cmd = /usr/local/bin/bcomp -ro $LOCAL $REMOTE
 	path = 
