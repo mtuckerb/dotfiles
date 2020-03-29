@@ -88,7 +88,9 @@ augroup ale
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_lint_on_enter = 0
   let g:ale_lint_on_insert_leave= 'never'
-  let g:ale_lint_save = 'true'
+  let g:ale_lint_save = 1
+  let g:ale_fix_on_save = 'never'
+  let g:ale_completion_enabled = 0
   let g:ale_linter_aliases = {'js': ['css', 'javascript']}
   let g:ale_linters = {
         \   'javascript': ['prettier','stylelint', 'eslint'], 
@@ -365,7 +367,7 @@ let g:user_emmet_settings = {
     \  },
   \}
 
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html,*.rb PrettierAsync
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 let g:rainbow_active = 1
 
 " quickfix-reflector
