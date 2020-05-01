@@ -26,6 +26,9 @@ rename the file to \`zprofile':
 
 MSG
 fi
+if [ ! -d $HOME/.oh-my-zsh ]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
 
 if [ ! -d $HOME/.oh-my-zsh/themes/powerlevel10k/ ]; then
   git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k/

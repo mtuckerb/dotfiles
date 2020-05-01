@@ -36,7 +36,7 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
 endif
 
 source ~/.vimrc.bundles
-
+imap jk <ESC>
 " Load matchit.vim, but only if the user hasn't installed a newer version.
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
@@ -88,7 +88,9 @@ augroup ale
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_lint_on_enter = 0
   let g:ale_lint_on_insert_leave= 'never'
-  let g:ale_lint_save = 'true'
+  let g:ale_lint_save = 1
+  let g:ale_fix_on_save = 'never'
+  let g:ale_completion_enabled = 0
   let g:ale_linter_aliases = {'js': ['css', 'javascript']}
   let g:ale_linters = {
         \   'javascript': ['prettier','stylelint', 'eslint'], 
@@ -159,6 +161,7 @@ function! InsertTabWrapper()
     return "\<C-p>"
   endif
 endfunction
+
 
 vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!~/.iterm2/it2copy ~/.vimbuffer<CR><CR>
 
@@ -290,8 +293,8 @@ let g:airline_symbols.space = "\ua0"
 
 set hidden
 nmap T :enew<cr>
-nmap l :bnext<CR>
-nmap h :bprevious<CR>
+nmap . :bnext<CR>
+nmap , :bprevious<CR>
 nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <leader>bl :ls<CR>
 
@@ -299,8 +302,6 @@ nmap <leader>bl :ls<CR>
 
 "set tags=./tags;
 "set tags+=gems.tags; 
-" Bind leader p to ctag search
-nnoremap <leader>. :CtrlPTag<cr>
 
 if (&diff)
   colorscheme github
@@ -344,13 +345,13 @@ nmap <silent> <C-A> :TestFile<CR>
 let test#strategy="vimterminal"
 " use m to run test (from
 " https://github.com/janko-m/vim-test/wiki/Minitest#m-runner)
-let g:test#ruby#minitest#executable = 'm'
-let g:test#ruby#rails#executable = ' m'
-let g:test#ruby#rspec#executable = ' m'
+let g:test#ruby#minitest#executable = 'be m'
+let g:test#ruby#rails#executable = 'be m'
+let g:test#ruby#rspec#executable = 'be m'
 " make sure it is not run through bundle exec (from https://github.com/janko-m/vim-test#ruby)
 let test#ruby#bundle_exec = 0
 " manually prepend spring (from https://github.com/janko-m/vim-test#executable)
-let test#ruby#m#executable = 'spring m'
+let test#ruby#m#executable = ' spring m'
 let test#ruby#use_spring_binstub = 0
 let g:DirDiffSimpleMap = 1
 let g:DirDiffTheme="github"
@@ -375,7 +376,7 @@ let g:user_emmet_settings = {
     \  },
   \}
 
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html,*.rb PrettierAsync
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 let g:rainbow_active = 1
 
 " quickfix-reflector
