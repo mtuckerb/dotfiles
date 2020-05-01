@@ -310,7 +310,16 @@ endif
 
 set mouse=a
 let g:NERDTreeMouseMode=3
-nnoremap <C-e> :NERDTreeToggle<CR>
+" Makes sure the cursor is on the open buffer
+nmap <silent> <C-e> :call NERDTreeToggleInCurDir()<cr>
+function! NERDTreeToggleInCurDir()
+  " If NERDTree is open in the current buffer
+  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
+    exe ":NERDTreeClose"
+  else
+    exe ":NERDTreeFind"
+  endif
+endfunction
 
 " enable gtags module
 let g:gutentags_modules = ['ctags']
@@ -346,6 +355,7 @@ let test#ruby#use_spring_binstub = 0
 let g:DirDiffSimpleMap = 1
 let g:DirDiffTheme="github"
 "let g:vimwiki_list = [{'path': '~/vimwiki', 'auto_toc': 1}]
+let g:vimwiki_table_mappings = 0
 let lineText = getline('.')
 
 "yank and put to tmux buffer

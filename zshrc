@@ -10,6 +10,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+if [[ -r /usr/local/opt/python/libexec ]]; then
+  export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+fi
+
 ZSH_THEME=powerlevel10k/powerlevel10k
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
 
