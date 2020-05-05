@@ -293,8 +293,8 @@ let g:airline_symbols.space = "\ua0"
 
 set hidden
 nmap T :enew<cr>
-nmap . :bnext<CR>
-nmap , :bprevious<CR>
+nmap - :bnext<CR>
+nmap _ :bprevious<CR>
 nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <leader>bl :ls<CR>
 
