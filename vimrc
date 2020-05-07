@@ -292,11 +292,7 @@ let g:airline_symbols.space = "\ua0"
 
 
 set hidden
-nmap T :enew<cr>
-nmap - :bnext<CR>
-nmap _ :bprevious<CR>
-nmap <leader>bq :bp <BAR> bd #<CR>
-nmap <leader>bl :ls<CR>
+
 
 :au FocusLost * silent! wa
 
@@ -362,7 +358,7 @@ let lineText = getline('.')
 "yank and put to tmux buffer
 nmap ty :Tyank<CR>
 nmap tp :Tput<CR>
-nmap <C-w> :bd<cr>
+nmap <Leader>w :bd<cr>
 autocmd BufReadPost, FileReadPost, BufNewFile, BufEnter * call system("tmux rename-window " . system("git rev-parse --show-toplevel | awk -F '/' '{print $NF}'") . "-" .  expand("%:t"))
 " Workaround for OSX filesystem chroot
 cmap w!! %!sudo tee > /dev/null 
@@ -435,3 +431,10 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+nmap T :enew<cr>
+nmap <C-h> :bprev<CR>
+nmap <C-l> :bnext <CR>
+nnoremap - :bnext<CR>
+nnoremap _ :bprevious<CR>
+nmap <leader>bq :bp <BAR> bd #<CR>
+nmap <leader>bl :ls<CR>
