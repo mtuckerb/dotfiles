@@ -292,11 +292,7 @@ let g:airline_symbols.space = "\ua0"
 
 
 set hidden
-nmap T :enew<cr>
-nmap - :bnext<CR>
-nmap _ :bprevious<CR>
-nmap <leader>bq :bp <BAR> bd #<CR>
-nmap <leader>bl :ls<CR>
+
 
 :au FocusLost * silent! wa
 
@@ -435,3 +431,10 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+nmap T :enew<cr>
+nmap <C-h> :bprev<CR>
+nmap <C-l> :bnext <CR>
+nnoremap - :bnext<CR>
+nnoremap _ :bprevious<CR>
+nmap <leader>bq :bp <BAR> bd #<CR>
+nmap <leader>bl :ls<CR>
