@@ -24,7 +24,7 @@ set shortmess+=c
 set signcolumn=yes
 
 if empty(glob('~/.vim/tmp'))
-    silent !mkdir -p ~/.vim/tmp
+  silent !mkdir -p ~/.vim/tmp
 endif
 set directory=$HOME/.vim/tmp
 
@@ -125,19 +125,31 @@ set nojoinspaces
 if executable('rg')
   " Use Ag over Grep
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-  command! -bang -nargs=* Ripgrep call fzf#vim#grep( 'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
+  command! -bang -nargs=* Ripgrep call fzf#vim#grep( 'rg --column -U --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
   set grepprg=rg\ --vimgrep
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'rg --literal --files-with-matches --nocolor --hidden -g "" %s'
+  function! RipgrepFzf(query, fullscreen)
+    let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+    let initial_command = printf(command_fmt, shellescape(a:query))
+    let reload_command = printf(command_fmt, '{q}')
+    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+    call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+  endfunction
 
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+  command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+  function! s:build_quickfix_list(lines)
+    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+    copen
+    cc
+  endfunction
 
-  if !exists(":Ag")
-    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-    nnoremap \ :Ag<SPACE>
-  endif
+  let g:fzf_action = {
+        \ 'ctrl-q': function('s:build_quickfix_list'),
+        \ 'ctrl-t': 'tab split',
+        \ 'ctrl-x': 'split',
+        \ 'ctrl-v': 'vsplit' }
+
+  let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 endif
 
 " Make it obvious where 80 characters is
@@ -213,21 +225,6 @@ nnoremap [r :ALEPreviousWrap<CR>
 nnoremap <C-p> :FZF <CR>
 nnoremap <C-f> :Ripgrep<Cr>
 
-"This would be a cool global search but it slows down ctrl-p so no
-"nnoremap <C-p>a :Rg 
-
-" --column: Show column number
-"  " --line-number: Show line number
-"  " --no-heading: Do not show file headings in results
-"  " --fixed-strings: Search term as a literal string
-"  " --ignore-case: Case insensitive search
-"  " --no-ignore: Do not respect .gitignore, etc...
-"  " --hidden: Search hidden files and folders
-"  " --follow: Follow symlinks
-"  " --glob: Additional conditions for search (in this case ignore everything in
-"  the .git/ folder)
-"  " --color: Search color options
-
 " Set spellfile to location that is guaranteed to exist, can be symlinked to
 " Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
 set spellfile=$HOME/.vim-spell-en.utf-8.add
@@ -243,24 +240,8 @@ if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
 
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
-
-"noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-"noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-"noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-"noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
-
-"
-
-
-" colorscheme one
-" colorscheme  Tomorrow-Night
 colorscheme tender
 
-" get rid of that aweful highlight color
 hi PMenu guifg=#5fd6fe ctermfg=111 guibg=#4e4e4e ctermbg=239 gui=NONE cterm=NONE
 let g:indentLine_enabled = 1
 let g:indentLine_color_term = 234
@@ -274,11 +255,7 @@ let g:indentLine_concealcursor = 'inc'
 let g:indentLine_conceallevel = 2
 
 let g:airline_theme='tender' " was tender
-"  let g:airline_theme='oceanicnext'
 let g:airline#extensions#tabline#enabled = 1
-""let g:airline#extensions#tabline#fnamemod = ':t'
-"let g:airline#extensions#tabline#fnamemod=":s?NERD_tree_.*?Nerd Tree?,:t"
-"let g:airline#extensions#tabline#fnamemod=":s,:t"
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
 let g:airline_enable_fugitive=1
@@ -292,7 +269,6 @@ let g:airline_symbols.space = "\ua0"
 
 
 set hidden
-
 
 :au FocusLost * silent! wa
 
@@ -367,10 +343,10 @@ runtime macros/emojis.vim
 
 let g:user_emmet_leader_key='<Leader> <Tab>'
 let g:user_emmet_settings = {
-  \  'javascript.jsx' : {
-    \      'extends' : 'jsx',
-    \  },
-  \}
+      \  'javascript.jsx' : {
+      \      'extends' : 'jsx',
+      \  },
+      \}
 
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 let g:rainbow_active = 1
