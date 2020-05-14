@@ -223,7 +223,7 @@ nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
 
 nnoremap <C-p> :FZF <CR>
-nnoremap <C-f> :Ripgrep<Cr>
+nnoremap <C-f> :RG<Cr>
 
 " Set spellfile to location that is guaranteed to exist, can be symlinked to
 " Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
