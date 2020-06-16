@@ -103,6 +103,7 @@ augroup ale
         \}
 augroup END
 nnoremap <Leader><Leader>f :ALEFix<CR>
+let g:prettier#autoformat_require_pragma = 1
 nnoremap confe :e $MYVIMRC<CR>
 nnoremap confr :source $MYVIMRC<CR>
 let g:ale_lint_on_text_changed = 0
@@ -372,7 +373,7 @@ let g:user_emmet_settings = {
     \  },
   \}
 
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue,*.yaml,*.html PrettierAsync
 let g:rainbow_active = 1
 
 " quickfix-reflector

@@ -36,14 +36,14 @@
 	brageall = !git brage refs/remotes
   churn = !git log -M -C --name-only --format=\"format:%n\" | grep . | sort | uniq -c | sort -n
 [core]
-  excludesfile = ~/.gitignore
+	excludesfile = /Users/mtuckerbradford/.gitignore_global
   autocrlf = input
 	pager = diff-so-fancy | less --tabs=4 -RXF
 [merge]
   ff = only
 	tool = vimdiff
 [commit]
-  template = ~/.gitmessage
+	template = ~/.gitmessage
 [fetch]
   prune = true
 [rebase]
@@ -63,7 +63,7 @@
    cmd = bcomp \"$LOCAL\" \"$REMOTE\"
    trustExitCode = true
 [user]
-	email = tucker@tuckerbradford.com
+	email = github@tuckerbradford.com
 	name = Tucker Bradford
 [difftool "sourcetree"]
 	cmd = /usr/local/bin/bcomp -ro $LOCAL $REMOTE
