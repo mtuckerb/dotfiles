@@ -112,11 +112,8 @@ let g:ale_lint_on_text_changed = 0
 let g:is_posix = 1
 
 " Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
+set tabstop=2 shiftwidth=2 expandtab
 set shiftround
-set expandtab
-
 " Display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
 
