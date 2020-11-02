@@ -30,7 +30,7 @@ Plug 'skywind3000/gutentags_plus'
 Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'janko-m/vim-test'
-Plug 'kchmck/vim-coffee-script'
+"Plug 'kchmck/vim-coffee-script'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'slim-template/vim-slim'
 Plug 'tpope/vim-bundler'
@@ -46,25 +46,25 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/tComment' "comment line,paragraph,etc `gcc`, `gcp`
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'branch': 'release/1.x',
-  \ 'for': [
-    \ 'javascript',
-    \ 'typescript',
-    \ 'css',
-    \ 'less',
-    \ 'scss',
-    \ 'json',
-    \ 'graphql',
-    \ 'markdown',
-    \ 'vue',
-    \ 'lua',
-    \ 'php',
-    \ 'python',
-    \ 'ruby',
-    \ 'html',
-    \ 'swift' ] }
+"Plug 'prettier/vim-prettier', {
+"  \ 'do': 'yarn install',
+"  \ 'branch': 'release/1.x',
+"  \ 'for': [
+"    \ 'javascript',
+"    \ 'typescript',
+"    \ 'css',
+"    \ 'less',
+"    \ 'scss',
+"    \ 'json',
+"    \ 'graphql',
+"    \ 'markdown',
+"    \ 'vue',
+"    \ 'lua',
+"    \ 'php',
+"    \ 'python',
+"    \ 'ruby',
+"    \ 'html',
+"    \ 'swift' ] }
 Plug 'will133/vim-dirdiff'
 Plug 'godlygeek/tabular' " Use :Tab to align text, and more http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
 "Plug 'airblade/vim-gitgutter'
@@ -117,6 +117,7 @@ Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
+Plug 'sheerun/vim-polyglot' "Multilanguage syntax and indentation support
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
 endif

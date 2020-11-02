@@ -346,7 +346,9 @@ let g:user_emmet_settings = {
       \  },
       \}
 
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue,*.yaml,*.html PrettierAsync
+"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue,*.yaml,*.html PrettierAsync "Ale-prettier
+"
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile') "Coc-prettier
 let g:rainbow_active = 1
 
 " quickfix-reflector
@@ -412,3 +414,4 @@ nnoremap - :bnext<CR>
 nnoremap _ :bprevious<CR>
 nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <leader>bl :ls<CR>
+let g:coc_global_extensions = ['coc-solargraph','coc-prettier','coc-tabnine']
