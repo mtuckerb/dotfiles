@@ -1,0 +1,8 @@
+# Refresh Rails Project
+
+function rrp(){
+  git pull
+  bundle
+  bundle exec rails db:migrate
+  bundle exec rails runner CourseSession.reindex
+}
