@@ -97,3 +97,12 @@ export NVM_DIR="/root/.nvm"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias ibrew='arch -x86_64 brew'
+. /opt/homebrew/opt/asdfasdf.sh
+
+# For rvm to build
+export LDFLAGS="-L/opt/homebrew/opt/libffi/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/libffi/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig"
+
+

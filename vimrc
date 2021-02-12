@@ -231,7 +231,7 @@ set spellfile=$HOME/.vim-spell-en.utf-8.add
 set complete+=kspell
 
 " Always use vertical diffs
-set diffopt+=horizontal
+"set diffopt+=horizontal
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
