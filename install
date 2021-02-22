@@ -1,0 +1,9 @@
+if [[ "$OSTYPE" == "darwin"* ]]; then
+# Mac OSX
+  which -s brew
+  if [[ $? != 0 ]] ; then
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+  brew install rcm oh_my_zsh git-lfs yarn npm
+fi
+rcup -d dotfiles -x README.md -x LICENSE -x Brewfile -x install
