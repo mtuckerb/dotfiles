@@ -252,12 +252,11 @@ let g:indentLine_setColors = 1
 let g:indentLine_concealcursor = 'inc'
 let g:indentLine_conceallevel = 2
 
-let g:airline_theme='tender' " was tender
+let g:airline_theme='bubblegum' " was tender
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
 let g:airline_enable_fugitive=1
-
 set guifont=Source\ Code\ Pro\ for\ Powerline:h14
 
 if !exists('g:airline_symbols')

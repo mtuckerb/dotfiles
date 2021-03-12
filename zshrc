@@ -106,3 +106,9 @@ export CPPFLAGS="-I/opt/homebrew/opt/libffi/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig"
 
 
+export PATH="/opt/homebrew/opt/icu4c/bin:$PATH"
+export PATH="/opt/homebrew/opt/icu4c/sbin:$PATH"
+export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
+export PATH="/opt/homebrew/opt/gnu-getopt/bin:$PATH"
+export PATH="/opt/homebrew/opt/libxml2/bin:$PATH"
+export PATH="/opt/homebrew/opt/qt/bin:$PATH"
