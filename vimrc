@@ -43,6 +43,7 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
 endif
 
 filetype plugin indent on
+au! BufNewFile,BufRead *.svelte set ft=html
 
 augroup vimrcEx
   autocmd!
@@ -84,16 +85,17 @@ augroup ale
     "autocmd InsertEnter * call ale#Queue(0)
     "autocmd InsertLeave * call ale#Queue(0)
   endif
-  let g:ale_ruby_rubocop_options = '-c ~/client_engineering/rubocop.yml --ignore-parent-exclusion' 
+  let g:ale_ruby_rubocop_options = '-c ~/client_engineering/rubocop.yml --ignore-parent-exclusion'
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_lint_on_enter = 0
   let g:ale_lint_on_insert_leave= 'never'
   let g:ale_lint_save = 1
   let g:ale_fix_on_save = 'never'
+  let g:ale_set_loclist = 1
   let g:ale_completion_enabled = 0
   let g:ale_linter_aliases = {'js': ['css', 'javascript']}
   let g:ale_linters = {
-        \   'javascript': ['prettier','stylelint', 'eslint'], 
+        \   'javascript': ['prettier','stylelint', 'eslint'],
         \   'ruby': ['rubocop']}
   let g:ale_linters_explicit=1
   let g:ale_fixers = {
@@ -102,6 +104,18 @@ augroup ale
         \   'ruby': ['rubocop']
         \}
 augroup END
+
+let g:airline#extensions#ale#enabled = 1
+let g:ale_error_format = '•%d'
+set statusline+=%#ale_error#\ %{exists('g:loaded_ale')?ALEGetError():''}%*
+
+let g:ale_warning_format = '•%d'
+set statusline+=%#ale_warning#\ %{exists('g:loaded_ale')?ALEGetWarning():''}%*
+
+hi ale_error   cterm=None ctermfg=124 ctermbg=237
+hi ale_warning cterm=None ctermfg=214 ctermbg=237
+
+
 nnoremap <Leader><Leader>f :ALEFix<CR>
 let g:prettier#autoformat_require_pragma = 1
 nnoremap confe :e $MYVIMRC<CR>
@@ -270,7 +284,7 @@ set hidden
 :au FocusLost * silent! wa
 
 "set tags=./tags;
-"set tags+=gems.tags; 
+"set tags+=gems.tags;
 
 if (&diff)
   colorscheme github
@@ -390,7 +404,7 @@ nmap tp :Tput<CR>
 nmap <C-x> :bd<cr>
 autocmd BufReadPost, FileReadPost, BufNewFile, BufEnter * call system("tmux rename-window " . system("git rev-parse --show-toplevel | awk -F '/' '{print $NF}'") . "-" .  expand("%:t"))
 " Workaround for OSX filesystem chroot
-cmap w!! %!sudo tee > /dev/null 
+cmap w!! %!sudo tee > /dev/null
 runtime macros/emojis.vim
 
 

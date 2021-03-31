@@ -65,6 +65,7 @@ Plug 'vim-scripts/tComment' "comment line,paragraph,etc `gcc`, `gcp`
 "    \ 'ruby',
 "    \ 'html',
 "    \ 'swift' ] }
+Plug 'ngmy/vim-rubocop'
 Plug 'will133/vim-dirdiff'
 Plug 'godlygeek/tabular' " Use :Tab to align text, and more http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
 "Plug 'airblade/vim-gitgutter'
@@ -83,7 +84,7 @@ Plug 'mileszs/ack.vim'
 Plug 'pgr0ss/vim-github-url'
 Plug 'jacoborus/tender.vim' "a theme
 Plug 'terryma/vim-smooth-scroll'
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 Plug 'tpope/vim-tbone' "tmux basics
 Plug 'tpope/vim-cucumber'
 Plug 'junegunn/gv.vim' "git commit browser :GV to open
@@ -118,6 +119,7 @@ Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
 Plug 'sheerun/vim-polyglot' "Multilanguage syntax and indentation support
+Plug 'reedes/vim-wordy'
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
 endif

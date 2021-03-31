@@ -81,3 +81,5 @@
 	trustExitCode = true
 [github]
   user = mtuckerb
+[pull]
+	ff = only

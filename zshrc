@@ -74,6 +74,7 @@ alias burnpack='bundle install && yarn install && webpack && RAILS_ENV=test bund
 alias be='bundle exec'
 
 plugins=(
+  asdf
   git
   bundler
   dotenv
@@ -97,18 +98,4 @@ export NVM_DIR="/root/.nvm"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
-alias ibrew='arch -x86_64 brew'
-. /opt/homebrew/opt/asdfasdf.sh
 
-# For rvm to build
-export LDFLAGS="-L/opt/homebrew/opt/libffi/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/libffi/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig"
-
-
-export PATH="/opt/homebrew/opt/icu4c/bin:$PATH"
-export PATH="/opt/homebrew/opt/icu4c/sbin:$PATH"
-export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
-export PATH="/opt/homebrew/opt/gnu-getopt/bin:$PATH"
-export PATH="/opt/homebrew/opt/libxml2/bin:$PATH"
-export PATH="/opt/homebrew/opt/qt/bin:$PATH"
