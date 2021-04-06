@@ -74,6 +74,7 @@ alias burnpack='bundle install && yarn install && webpack && RAILS_ENV=test bund
 alias be='bundle exec'
 
 plugins=(
+  asdf
   git
   bundler
   dotenv
