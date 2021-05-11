@@ -83,7 +83,6 @@ plugins=(
   ruby
   zsh-autosuggestions
 )
-# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -98,4 +97,10 @@ export NVM_DIR="/root/.nvm"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
+
+if [[ "$OS" = "OSX" ]] ; then
+  alias ibrew='arch -x86_64 brew'
+  . /opt/homebrew/opt/asdfasdf.sh
+fi
+
 
