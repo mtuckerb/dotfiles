@@ -482,3 +482,6 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <leader>bl :ls<CR>
 
 let g:coc_global_extensions = ['coc-solargraph','coc-prettier','coc-tabnine']
+
+let CoVim_default_name = "Tucker"
+let CoVim_default_port = "9999"

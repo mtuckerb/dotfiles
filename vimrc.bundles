@@ -120,6 +120,7 @@ Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
 Plug 'sheerun/vim-polyglot' "Multilanguage syntax and indentation support
 Plug 'reedes/vim-wordy'
+Plug 'FredKSchott/CoVim'
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
 endif

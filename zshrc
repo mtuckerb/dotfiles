@@ -1,5 +1,5 @@
 if [[ ! -a ~/.oh-my-zsh ]]; then
-  git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh;
+  git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 fi
 export ZSH="$HOME/.oh-my-zsh"
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
@@ -83,7 +83,7 @@ plugins=(
   ruby
   zsh-autosuggestions
 )
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
