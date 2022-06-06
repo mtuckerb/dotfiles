@@ -5,7 +5,8 @@ export ZSH="$HOME/.oh-my-zsh"
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 export SERGE_DATABASE="DBI:SQLite:dbname=$HOME/.serge/db/intellum.db3"
 export SERGE_DATA_DIR="$HOME/.serge"
-export PATH="$PATH:$HOME/.serge/serge/bin/:$HOME/bin"
+export PATH="$PATH:$HOME/.serge/serge/bin/:$HOME/bin:$HOME/.serverless/bin:$PATH"
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -89,18 +90,20 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-export NVM_DIR="/root/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 if [[ "$OS" = "OSX" ]] ; then
   alias ibrew='arch -x86_64 brew'
-  . /opt/homebrew/opt/asdfasdf.sh
+  . /usr/local/homebrew/opt/asdfasdf.sh
 fi
 
 
+
+# Added by serverless binary installer
+export PATH="$HOME/.serverless/bin:$PATH"
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+eval $(thefuck --alias)
