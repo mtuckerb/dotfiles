@@ -1,0 +1,9 @@
+[build]
+rustc-wrapper = "/Users/mtuckerb/.asdf/installs/rust/1.65.0/bin/sccache"
+
+[dependencies]
+bat = true
+du-dust = true
+exa = true
+starship = true
+

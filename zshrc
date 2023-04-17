@@ -1,3 +1,7 @@
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 if [[ ! -a ~/.oh-my-zsh ]]; then
   git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 fi
@@ -7,9 +11,6 @@ export SERGE_DATABASE="DBI:SQLite:dbname=$HOME/.serge/db/intellum.db3"
 export SERGE_DATA_DIR="$HOME/.serge"
 export PATH="$PATH:$HOME/.serge/serge/bin/:$HOME/bin:$HOME/.serverless/bin:$PATH"
 
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
 if [[ -r /usr/local/opt/python/libexec ]]; then
   export PATH="/usr/local/opt/python/libexec/bin:$PATH"
@@ -90,20 +91,35 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
+# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+alias myip='curl ifconfig.co/'
 
-if [[ "$OS" = "OSX" ]] ; then
-  alias ibrew='arch -x86_64 brew'
-  . /usr/local/homebrew/opt/asdfasdf.sh
-fi
-
-
-
-# Added by serverless binary installer
-export PATH="$HOME/.serverless/bin:$PATH"
 
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 eval $(thefuck --alias)
+alias node_cli='node -i -e "$(< ./cli.js )"'
+
+# bun completions
+[ -s "/Users/mtuckerb/.bun/_bun" ] && source "/Users/mtuckerb/.bun/_bun"
+
+# bun
+export BUN_INSTALL="/Users/mtuckerb/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/mtuckerb/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/mtuckerb/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/mtuckerb/opt/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/mtuckerb/opt/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

@@ -5,8 +5,8 @@
 
 exit 0 if ARGV.include?('--no-verify')
 # Update this list with your own forbidden keywords
-KEYWORDS = %w[byebug binding.pry console.log debugger nocommit]
-IGNORE_FILES = %w[Gemfile Gemfile.lock .gitignore node_modules/]
+KEYWORDS = %w[byebug binding.pry debugger nocommit]
+IGNORE_FILES = %w[Gemfile Gemfile.lock .gitignore node_modules/ build/]
 def red(text)
   "\033[31m#{text}\033[0m"
 end

@@ -4,6 +4,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   if [[ $? != 0 ]] ; then
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
-  brew install rcm oh_my_zsh git-lfs yarn npm
+  brew install rcm oh_my_zsh git-lfs yarn npm asdf nu  oh-my-posh
+  asdf plugin add golang java kotlin maven nodejs python ruby rust yarn
+  asdf install rust
+  asdf reshim
+  cargo install  zellij gitui cargo-info porsmo speedtest-rs wiki-tui rtx-cli oh-my-posh sccache starship exa bat du-dust nu coreutils ripgrep irust bacon
 fi
 rcup -d dotfiles -x README.md -x LICENSE -x Brewfile -x install

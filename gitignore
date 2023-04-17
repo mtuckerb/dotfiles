@@ -11,3 +11,5 @@ tags
 tmp/**/*
 !tmp/cache/.keep
 *.pyc
+node_modules
+*.bin
