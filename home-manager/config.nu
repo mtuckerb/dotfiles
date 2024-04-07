@@ -554,9 +554,11 @@ def git_pull_all [] {
  }
 }
 
-'
-let mise_path = $nu.default-config-dir | path join scripts mise.nu
-^mise activate nu | save $mise_path --force
-' | save $nu.env-path --append
-"\nuse mise.nu" | save $nu.config-path --append'
-'
+$env.PATH = ($env.PATH | prepend '/home/mtuckerb/.local/share/mise/shims')
+{ ||
+    if (which direnv | is-empty) {
+        return
+    }
+
+    direnv export json | from json | default {} | load-env
+}
